@@ -26,15 +26,10 @@ public class Uxie {
             switch (userCommand) {
                 case "list":
                     // output contents of list
-                    StringBuilder sb = new StringBuilder();
                     for (int i = 1; i <= listContents.size(); i++) {
-                        sb.append("    "); // there's probably a better way to do this
-                        sb.append(i);
-                        sb.append(". ");
-                        sb.append(listContents.get(i-1));
-                        if (i != listContents.size()) { sb.append("\n"); }
+                        System.out.printf("    %s. %s", i, listContents.get(i-1));
+                        if (i != listContents.size()) { System.out.println(); }
                     }
-                    System.out.println(sb);
                     System.out.println(LINE_BREAK);
                     break;
 
@@ -46,7 +41,7 @@ public class Uxie {
                 default:
                     // store command to list
                     listContents.add(userCommand);
-                    System.out.println("    added " + userCommand); // echo command
+                    System.out.printf("    added %s", userCommand); // echo command
                     System.out.println(LINE_BREAK);
             }
         }
