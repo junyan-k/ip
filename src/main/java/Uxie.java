@@ -1,3 +1,7 @@
+/*
+Main class of Chatbot Uxie.
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
