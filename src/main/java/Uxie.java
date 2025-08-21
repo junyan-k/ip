@@ -3,6 +3,7 @@ Main class of Chatbot Uxie.
  */
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Uxie {
@@ -11,7 +12,7 @@ public class Uxie {
     // used to space messages
     private final static String LINE_BREAK =
             "    ____________________________________________________________";
-    private final static ArrayList<Task> taskList = new ArrayList<>();
+    private final static List<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         // Output: Welcome (could avoid hardcoding these greetings in future)
@@ -23,13 +24,14 @@ public class Uxie {
 
         // Receive commands
         Scanner s = new Scanner(System.in);
-        int taskIndex; Task task;
+        // empty variables to use during switch (these are NOT reset after loop so take care)
+        int taskIndex; Task task; String desc; String time1; String time2;
         boolean running = true;
         while (running) {
             String userCommand = s.nextLine(); // get next command
-            String[] splitCommand = userCommand.split(" ");
+            List<String> splitCommand = new ArrayList<>(List.of(userCommand.split(" ")));
             System.out.println(LINE_BREAK);
-            switch (splitCommand[0]) {
+            switch (splitCommand.get(0)) {
                 case "list": // output contents of list
                     for (int i = 1; i <= taskList.size(); i++) {
                         System.out.printf("    %s. %s\n", i, taskList.get(i-1));
@@ -37,7 +39,7 @@ public class Uxie {
                     break;
 
                 case "mark": // mark task <n> as completed
-                    taskIndex = Integer.parseInt(splitCommand[1]);
+                    taskIndex = Integer.parseInt(splitCommand.get(1));
                     task = taskList.get(taskIndex-1);
                     task.markCompleted();
                     System.out.printf("    Task %s (%s) is done. Congratulations.\n",
@@ -45,11 +47,64 @@ public class Uxie {
                     break;
 
                 case "unmark": // mark task <n> as incomplete
-                    taskIndex = Integer.parseInt(splitCommand[1]);
+                    taskIndex = Integer.parseInt(splitCommand.get(1));
                     task = taskList.get(taskIndex-1);
                     task.markIncomplete();
                     System.out.printf("    Forgot something? Task %s (%s) is now incomplete.\n",
                             taskIndex, task.getDesc());
+                    break;
+
+                case "todo": // add task as a todos
+                    splitCommand.remove(0); // remove command word
+                    desc = String.join(" ", splitCommand);
+                    task = new ToDo(desc);
+                    taskList.add(task);
+                    System.out.printf("    Alright. Task added:\n      %s\n    You have %s total tasks. Best of luck.\n",
+                            task, taskList.size());
+                    break;
+
+                case "deadline": // add task as a deadline
+                    splitCommand.remove(0); // remove command word
+                    int byIndex = -1;
+                    for (int i = 1; i < splitCommand.size(); i++) { // skip first as task desc cannot be empty
+                        // search for "/by"
+                        if (splitCommand.get(i).equals("/by")) {
+                            byIndex = i;
+                            break;
+                        }
+                    }
+
+                    desc = String.join(" ", splitCommand.subList(0, byIndex));
+                    time1 = String.join(" ", splitCommand.subList(byIndex + 1, splitCommand.size()));
+                    task = new Deadline(desc, time1);
+                    taskList.add(task);
+                    System.out.printf("    Alright. Task added:\n      %s\n    You have %s total tasks. But we all know you'll just rush them at the last minute like you always do.\n",
+                            task, taskList.size());
+                    break;
+
+                case "event": // add task as an event
+                    splitCommand.remove(0); // remove command word
+                    int fromIndex = -1;
+                    int toIndex = -1;
+                    for (int i = 1; i < splitCommand.size(); i++) { // skip first as task desc cannot be empty
+                        // search for "/from"
+                        if (splitCommand.get(i).equals("/from")) {
+                            fromIndex = i;
+                        }
+                        // search for "/to"
+                        if (splitCommand.get(i).equals("/to")) {
+                            toIndex = i;
+                            break;
+                        }
+                    }
+
+                    desc = String.join(" ", splitCommand.subList(0, fromIndex));
+                    time1 = String.join(" ", splitCommand.subList(fromIndex + 1, toIndex));
+                    time2 = String.join(" ", splitCommand.subList(toIndex + 1, splitCommand.size()));
+                    task = new Event(desc, time1, time2);
+                    taskList.add(task);
+                    System.out.printf("    Alright. Task added:\n      %s\n    You have %s total tasks. Have fun.\n",
+                            task, taskList.size());
                     break;
 
                 case "goodbye":
@@ -57,9 +112,8 @@ public class Uxie {
                     running = false;
                     break;
 
-                default: // adds message as Task to list
-                    taskList.add(new Task(userCommand));
-                    System.out.printf("    added %s\n", userCommand); // echo command
+                default: // unrecognized command
+                    System.out.println("    Hm. Your words aren't making sense. Maybe check your spelling.");
             }
             if (running) { System.out.println(LINE_BREAK); }
         }
