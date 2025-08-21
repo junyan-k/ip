@@ -20,6 +20,34 @@ public class Task {
     }
 
     /**
+     * Marks Task as complete. If Task is already complete,
+     * throws Exception.
+     */
+    public void markCompleted() {
+        if (!this.completed) {
+            this.completed = true;
+        }
+    }
+
+    /**
+     * Marks Task as incomplete. If Task is already incomplete,
+     * throws Exception.
+     */
+    public void markIncomplete() {
+        if (this.completed) {
+            this.completed = false;
+        }
+    }
+
+    /**
+     * Returns description of Task.
+     * @return description of Task.
+     */
+    public String getDesc() {
+        return this.desc;
+    }
+
+    /**
      * Returns this Task as String in following format:
      * "[<X if complete, blank if not>] <desc>"
      *

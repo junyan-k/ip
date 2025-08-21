@@ -11,7 +11,7 @@ public class Uxie {
     // used to space messages
     private final static String LINE_BREAK =
             "    ____________________________________________________________";
-    private final static ArrayList<Task> listContents = new ArrayList<>();
+    private final static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         // Output: Welcome (could avoid hardcoding these greetings in future)
@@ -23,6 +23,7 @@ public class Uxie {
 
         // Receive commands
         Scanner s = new Scanner(System.in);
+        int taskIndex; Task task;
         boolean running = true;
         while (running) {
             String userCommand = s.nextLine(); // get next command
@@ -30,10 +31,25 @@ public class Uxie {
             System.out.println(LINE_BREAK);
             switch (splitCommand[0]) {
                 case "list": // output contents of list
-                    for (int i = 1; i <= listContents.size(); i++) {
-                        System.out.printf("    %s. %s\n", i, listContents.get(i-1));
+                    for (int i = 1; i <= taskList.size(); i++) {
+                        System.out.printf("    %s. %s\n", i, taskList.get(i-1));
                     }
-                    System.out.println(LINE_BREAK);
+                    break;
+
+                case "mark": // mark task <n> as completed
+                    taskIndex = Integer.parseInt(splitCommand[1]);
+                    task = taskList.get(taskIndex-1);
+                    task.markCompleted();
+                    System.out.printf("    Task %s (%s) is done. Congratulations.\n",
+                            taskIndex, task.getDesc());
+                    break;
+
+                case "unmark": // mark task <n> as incomplete
+                    taskIndex = Integer.parseInt(splitCommand[1]);
+                    task = taskList.get(taskIndex-1);
+                    task.markIncomplete();
+                    System.out.printf("    Forgot something? Task %s (%s) is now incomplete.\n",
+                            taskIndex, task.getDesc());
                     break;
 
                 case "goodbye":
@@ -42,10 +58,10 @@ public class Uxie {
                     break;
 
                 default: // adds message as Task to list
-                    listContents.add(new Task(userCommand));
+                    taskList.add(new Task(userCommand));
                     System.out.printf("    added %s\n", userCommand); // echo command
-                    System.out.println(LINE_BREAK);
             }
+            if (running) { System.out.println(LINE_BREAK); }
         }
 
         // Goodbye
