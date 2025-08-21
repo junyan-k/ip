@@ -11,7 +11,7 @@ public class Uxie {
     // used to space messages
     private final static String LINE_BREAK =
             "    ____________________________________________________________";
-    private final static ArrayList<String> listContents = new ArrayList<>();
+    private final static ArrayList<Task> listContents = new ArrayList<>();
 
     public static void main(String[] args) {
         // Output: Welcome (could avoid hardcoding these greetings in future)
@@ -26,26 +26,24 @@ public class Uxie {
         boolean running = true;
         while (running) {
             String userCommand = s.nextLine(); // get next command
+            String[] splitCommand = userCommand.split(" ");
             System.out.println(LINE_BREAK);
-            switch (userCommand) {
-                case "list":
-                    // output contents of list
+            switch (splitCommand[0]) {
+                case "list": // output contents of list
                     for (int i = 1; i <= listContents.size(); i++) {
-                        System.out.printf("    %s. %s", i, listContents.get(i-1));
-                        if (i != listContents.size()) { System.out.println(); }
+                        System.out.printf("    %s. %s\n", i, listContents.get(i-1));
                     }
                     System.out.println(LINE_BREAK);
                     break;
 
                 case "goodbye":
-                case "bye":
+                case "bye": // exits program
                     running = false;
                     break;
 
-                default:
-                    // store command to list
-                    listContents.add(userCommand);
-                    System.out.printf("    added %s", userCommand); // echo command
+                default: // adds message as Task to list
+                    listContents.add(new Task(userCommand));
+                    System.out.printf("    added %s\n", userCommand); // echo command
                     System.out.println(LINE_BREAK);
             }
         }
