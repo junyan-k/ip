@@ -1,0 +1,13 @@
+todo eat breakfast
+deadline kill god /by 11am
+event drink booze /from 11.01am /to 5.59pm
+event drive /from 6pm /to 9pm
+deadline drive some more /by 12am
+list
+mark 1
+mark 2
+list
+mark 3
+unmark 2
+list
+goodbye
