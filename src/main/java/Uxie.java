@@ -43,7 +43,7 @@ public class Uxie {
                         taskIndex = Integer.parseInt(splitCommand.get(1));
                         if (taskIndex < 0 || taskIndex > taskList.size()) {
                             System.out.println(taskList.size());
-                            throw new UxieSyntaxException("That task doesn't exist.");
+                            throw new UxieIllegalOpException("That task doesn't exist.");
                         }
                         task = taskList.get(taskIndex - 1);
                         task.markCompleted();
@@ -54,7 +54,7 @@ public class Uxie {
                     case "unmark": // mark task <n> as incomplete
                         taskIndex = Integer.parseInt(splitCommand.get(1));
                         if (taskIndex < 1 || taskIndex > taskList.size()) {
-                            throw new UxieSyntaxException("That task doesn't exist.");
+                            throw new UxieIllegalOpException("That task doesn't exist.");
                         }
                         task = taskList.get(taskIndex - 1);
                         task.markIncomplete();
@@ -65,7 +65,7 @@ public class Uxie {
                     case "delete": // delete task from taskList
                         taskIndex = Integer.parseInt(splitCommand.get(1));
                         if (taskIndex < 1 || taskIndex > taskList.size()) {
-                            throw new UxieSyntaxException("That task doesn't exist.");
+                            throw new UxieIllegalOpException("That task doesn't exist.");
                         }
                         task = taskList.get(taskIndex - 1);
                         taskList.remove(taskIndex - 1);
