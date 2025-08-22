@@ -4,14 +4,44 @@
     Dare I ask why you have summoned me?
     ____________________________________________________________
     ____________________________________________________________
+    Didn't quite catch that, trainer. Consider checking your spelling.
+    ____________________________________________________________
+    ____________________________________________________________
+    Didn't quite catch that, trainer. Your task description can't be empty.
+    ____________________________________________________________
+    ____________________________________________________________
     Alright. Task added:
       [T][ ] eat breakfast
     You have 1 total tasks. Best of luck.
     ____________________________________________________________
     ____________________________________________________________
+    Didn't quite catch that, trainer. Your task description can't be empty.
+    ____________________________________________________________
+    ____________________________________________________________
+    Didn't quite catch that, trainer. A deadline needs a... deadline. ('/by')
+    ____________________________________________________________
+    ____________________________________________________________
+    Didn't quite catch that, trainer. Your task description can't be empty.
+    ____________________________________________________________
+    ____________________________________________________________
     Alright. Task added:
       [D][ ] kill god (by: 11am)
     You have 2 total tasks. But we all know you'll just rush them at the last minute like you always do.
+    ____________________________________________________________
+    ____________________________________________________________
+    Didn't quite catch that, trainer. Your task description can't be empty.
+    ____________________________________________________________
+    ____________________________________________________________
+    Didn't quite catch that, trainer. You're missing an argument there. ('/from', '/to')
+    ____________________________________________________________
+    ____________________________________________________________
+    Didn't quite catch that, trainer. Your task description can't be empty.
+    ____________________________________________________________
+    ____________________________________________________________
+    Didn't quite catch that, trainer. You're missing an argument there. ('/from', '/to')
+    ____________________________________________________________
+    ____________________________________________________________
+    Didn't quite catch that, trainer. /from should be before /to.
     ____________________________________________________________
     ____________________________________________________________
     Alright. Task added:

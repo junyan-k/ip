@@ -1,5 +1,15 @@
+help
+todo
 todo eat breakfast
+deadline
+deadline kill god
+deadline /by 11am
 deadline kill god /by 11am
+event
+event drink booze
+event /from 11.01am
+event drink booze /from 11.01am
+event drink booze /to 5.59pm /from 11.01am
 event drink booze /from 11.01am /to 5.59pm
 event drive /from 6pm /to 9pm
 deadline drive some more /by 12am
