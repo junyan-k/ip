@@ -82,20 +82,30 @@
     5. [D][ ] drive some more (by: 12am)
     ____________________________________________________________
     ____________________________________________________________
-    Task 3 (drink booze) is done. Congratulations.
+    Good to be realistic. Task 1 (eat breakfast) has been deleted.
     ____________________________________________________________
     ____________________________________________________________
-    Forgot something? Task 2 (kill god) is now incomplete.
+    Task 3 (drive) is done. Congratulations.
     ____________________________________________________________
     ____________________________________________________________
     Can't do that, trainer. This task is already incomplete.
     ____________________________________________________________
     ____________________________________________________________
-    1. [T][X] eat breakfast
-    2. [D][ ] kill god (by: 11am)
-    3. [E][X] drink booze (from: 11.01am to: 5.59pm)
-    4. [E][ ] drive (from: 6pm to: 9pm)
-    5. [D][ ] drive some more (by: 12am)
+    Can't do that, trainer. This task is already incomplete.
+    ____________________________________________________________
+    ____________________________________________________________
+    1. [D][X] kill god (by: 11am)
+    2. [E][ ] drink booze (from: 11.01am to: 5.59pm)
+    3. [E][X] drive (from: 6pm to: 9pm)
+    4. [D][ ] drive some more (by: 12am)
+    ____________________________________________________________
+    ____________________________________________________________
+    Good to be realistic. Task 2 (drink booze) has been deleted.
+    ____________________________________________________________
+    ____________________________________________________________
+    1. [D][X] kill god (by: 11am)
+    2. [E][X] drive (from: 6pm to: 9pm)
+    3. [D][ ] drive some more (by: 12am)
     ____________________________________________________________
     ____________________________________________________________
     That is all? Very well. Goodbye.

@@ -18,8 +18,11 @@ mark 1
 mark 2
 mark 1
 list
+delete 1
 mark 3
 unmark 2
 unmark 2
+list
+delete 2
 list
 goodbye

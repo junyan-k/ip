@@ -62,6 +62,18 @@ public class Uxie {
                                 taskIndex, task.getDesc());
                         break;
 
+                    case "delete": // delete task from taskList
+                        taskIndex = Integer.parseInt(splitCommand.get(1));
+                        if (taskIndex < 1 || taskIndex > taskList.size()) {
+                            throw new UxieSyntaxException("That task doesn't exist.");
+                        }
+                        task = taskList.get(taskIndex - 1);
+                        taskList.remove(taskIndex - 1);
+                        System.out.printf("    Good to be realistic. Task %s (%s) has been deleted.\n",
+                                taskIndex, task.getDesc());
+                        break;
+
+
                     case "todo": // add task as a todos
                         splitCommand.remove(0); // remove command word
                         desc = String.join(" ", splitCommand);
