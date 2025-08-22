@@ -23,9 +23,11 @@ public class Task {
      * Marks Task as complete. If Task is already complete,
      * throws Exception.
      */
-    public void markCompleted() {
+    public void markCompleted() throws UxieIllegalOpException {
         if (!this.completed) {
             this.completed = true;
+        } else {
+            throw new UxieIllegalOpException("This task is already complete.");
         }
     }
 
@@ -33,9 +35,11 @@ public class Task {
      * Marks Task as incomplete. If Task is already incomplete,
      * throws Exception.
      */
-    public void markIncomplete() {
+    public void markIncomplete() throws UxieIllegalOpException {
         if (this.completed) {
             this.completed = false;
+        } else {
+            throw new UxieIllegalOpException("This task is already incomplete.");
         }
     }
 

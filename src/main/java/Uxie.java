@@ -145,7 +145,6 @@ public class Uxie {
                         break;
 
                     default: // unrecognized command
-                        // System.out.println("    Hm. Your words aren't making sense. Maybe check your spelling.");
                         throw new UxieSyntaxException("Consider checking your spelling.");
                 }
             } catch (UxieException e) {
