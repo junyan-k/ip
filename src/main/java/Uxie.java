@@ -41,7 +41,8 @@ public class Uxie {
 
                     case "mark": // mark task <n> as completed
                         taskIndex = Integer.parseInt(splitCommand.get(1));
-                        if (taskIndex < 0 || taskIndex >= taskList.size()) {
+                        if (taskIndex < 0 || taskIndex > taskList.size()) {
+                            System.out.println(taskList.size());
                             throw new UxieSyntaxException("That task doesn't exist.");
                         }
                         task = taskList.get(taskIndex - 1);
