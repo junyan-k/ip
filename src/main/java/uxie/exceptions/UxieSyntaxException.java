@@ -1,3 +1,5 @@
+package uxie.exceptions;
+
 /**
  * Indicates an error in user input syntax. Details are provided in
  * exception message.

@@ -1,3 +1,5 @@
+package uxie.tasks;
+
 /**
  * ToDos are Tasks without any date/time attached.
  */

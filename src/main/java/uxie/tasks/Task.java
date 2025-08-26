@@ -1,3 +1,7 @@
+package uxie.tasks;
+
+import uxie.exceptions.UxieIllegalOpException;
+
 /**
  * Class representing Tasks.
  */

@@ -1,3 +1,5 @@
+package uxie.tasks;
+
 /**
  * Deadlines are Tasks that need to be done by a specific date/time.
  * (note: date/time is represented by String to allow for more

@@ -1,3 +1,5 @@
+package uxie.exceptions;
+
 /**
  * Represents UxieExceptions to do with illegal operations.
  */

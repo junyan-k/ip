@@ -1,3 +1,5 @@
+package uxie.tasks;
+
 /**
  * Events are Tasks that start and end at a specific date/time.
  * (note: date/time is represented by String to allow for more

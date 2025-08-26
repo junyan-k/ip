@@ -1,3 +1,5 @@
+package uxie.exceptions;
+
 /**
  * This class represents all Exceptions unique to Uxie.
  */

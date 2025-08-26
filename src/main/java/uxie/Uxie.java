@@ -1,6 +1,16 @@
+package uxie;
+
 /*
 Main class of Chatbot Uxie.
  */
+
+import uxie.exceptions.UxieException;
+import uxie.exceptions.UxieIllegalOpException;
+import uxie.exceptions.UxieSyntaxException;
+import uxie.tasks.Deadline;
+import uxie.tasks.Event;
+import uxie.tasks.Task;
+import uxie.tasks.ToDo;
 
 import java.util.ArrayList;
 import java.util.List;
