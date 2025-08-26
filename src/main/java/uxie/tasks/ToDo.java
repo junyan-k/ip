@@ -2,6 +2,8 @@ package uxie.tasks;
 
 /**
  * ToDos are Tasks without any date/time attached.
+ *
+ * @author junyan-k
  */
 
 public class ToDo extends Task {
@@ -11,10 +13,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns ToDos as String in format:
-     * "[T][<'X' if completed, ' ' if not>] <desc>"
-     *
-     * @return formatted String
+     * Returns ToDos as String.
+     * Format: "[T][<'X' if completed, ' ' if not>] <desc>"
      */
     @Override
     public String toString() {

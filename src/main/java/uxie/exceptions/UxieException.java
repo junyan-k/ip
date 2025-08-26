@@ -2,6 +2,8 @@ package uxie.exceptions;
 
 /**
  * This class represents all Exceptions unique to Uxie.
+ *
+ * @author junyan-k
  */
 public class UxieException extends Exception {
 
@@ -10,10 +12,8 @@ public class UxieException extends Exception {
     }
 
     /**
-     * Returns UxieException as String in format:
-     * "Uxie: <message>"
-     *
-     * @return formatted string
+     * Returns UxieException as String.
+     * Format: "Uxie: <message>"
      */
     @Override
     public String toString() {

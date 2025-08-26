@@ -1,8 +1,10 @@
 package uxie.exceptions;
 
 /**
- * Indicates an error in user input syntax. Details are provided in
- * exception message.
+ * Indicates an error in user input syntax.
+ * Details are provided in exception message.
+ *
+ * @author junyan-k
  */
 
 public class UxieSyntaxException extends UxieException {
@@ -12,8 +14,8 @@ public class UxieSyntaxException extends UxieException {
     }
 
     /**
-     * Returns exception as String in format:
-     * "Didn't quite catch that, trainer. <message>"
+     * Returns exception as String.
+     * Format: "Didn't quite catch that, trainer. <message>"
      */
     @Override
     public String toString() {

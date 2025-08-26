@@ -4,10 +4,14 @@ package uxie.tasks;
  * Deadlines are Tasks that need to be done by a specific date/time.
  * (note: date/time is represented by String to allow for more
  *  flexible inputs)
+ *
+ * @author junyan-k
  */
 public class Deadline extends Task {
 
-    private String deadline; // deadline represented in String
+    /** Deadline of task. */
+    private String deadline;
+
 
     public Deadline(String desc, String deadline) {
         super(desc);
@@ -15,10 +19,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns Deadline as String in format:
-     * "[D][<'X' if completed, ' ' if not>] <desc> (by: <deadline>)"
-     *
-     * @return formatted String
+     * Returns Deadline as String.
+     * Format: "[D][<'X' if completed, ' ' if not>] <desc> (by: <deadline>)"
      */
     @Override
     public String toString() {

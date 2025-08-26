@@ -2,6 +2,9 @@ package uxie.exceptions;
 
 /**
  * Represents UxieExceptions to do with illegal operations.
+ * Details are provided in error message.
+ *
+ * @author junyan-k
  */
 
 public class UxieIllegalOpException extends UxieException {
@@ -11,10 +14,8 @@ public class UxieIllegalOpException extends UxieException {
     }
 
     /**
-     * Returns exception as string in format:
-     * "Can't do that, trainer. <message>"
-     *
-     * @return formatted string
+     * Returns exception as String.
+     * Format: "Can't do that, trainer. <message>"
      */
     @Override
     public String toString() {
