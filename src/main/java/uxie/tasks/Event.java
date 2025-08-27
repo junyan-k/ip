@@ -24,6 +24,12 @@ public class Event extends Task {
         this.endDateTime = endDateTime;
     }
 
+    public Event(boolean isCompleted, String desc, String startDateTime, String endDateTime) {
+        super(isCompleted, desc);
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+    }
+
     /**
      * Returns task type symbol. ("E")
      */

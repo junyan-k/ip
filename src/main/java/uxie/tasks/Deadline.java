@@ -20,6 +20,11 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public Deadline(boolean isCompleted, String desc, String deadline) {
+        super(isCompleted, desc);
+        this.deadline = deadline;
+    }
+
     /**
      * Returns task type symbol. ("D")
      */

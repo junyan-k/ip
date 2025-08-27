@@ -14,6 +14,10 @@ public class ToDo extends Task {
         super(desc);
     }
 
+    public ToDo(boolean isCompleted, String desc) {
+        super(isCompleted, desc);
+    }
+
     /**
      * Returns task type symbol. ("T")
      */

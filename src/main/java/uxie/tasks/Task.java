@@ -23,6 +23,11 @@ public abstract class Task {
         this.isCompleted = false;
     }
 
+    public Task(boolean isCompleted, String desc) {
+        this.desc = desc;
+        this.isCompleted = isCompleted;
+    }
+
     /**
      * Returns whether Task is completed.
      */
