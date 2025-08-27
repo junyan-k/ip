@@ -7,7 +7,7 @@ import uxie.exceptions.UxieIllegalOpException;
  *
  * @author junyan-k
  */
-public class Task {
+public abstract class Task {
 
     /** Whether Task is completed. */
     private boolean isCompleted;
@@ -60,11 +60,16 @@ public class Task {
     }
 
     /**
+     * Returns task type symbol.
+     */
+    public abstract String getSymbol();
+
+    /**
      * Returns this Task as String.
      * Format: "[<X if complete, blank if not>] <desc>"
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.completed ? "X" : " ", this.desc);
+        return String.format("[%s] %s", this.isCompleted ? "X" : " ", this.desc);
     }
 }

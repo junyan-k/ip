@@ -19,12 +19,20 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns task type symbol. ("D")
+     */
+    @Override
+    public String getSymbol() {
+        return "D";
+    }
+
+    /**
      * Returns Deadline as String.
      * Format: "[D][<'X' if completed, ' ' if not>] <desc> (by: <deadline>)"
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), deadline);
+        return String.format("[%s]%s (by: %s)", getSymbol(), super.toString(), deadline);
     }
 
 }

@@ -13,12 +13,20 @@ public class ToDo extends Task {
     }
 
     /**
+     * Returns task type symbol. ("T")
+     */
+    @Override
+    public String getSymbol() {
+        return "T";
+    }
+
+    /**
      * Returns ToDos as String.
      * Format: "[T][<'X' if completed, ' ' if not>] <desc>"
      */
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s", getSymbol(), super.toString());
     }
 
 }

@@ -23,13 +23,21 @@ public class Event extends Task {
     }
 
     /**
+     * Returns task type symbol. ("E")
+     */
+    @Override
+    public String getSymbol() {
+        return "E";
+    }
+
+    /**
      * Returns Event as String.
      * Format: "[E][<'X' if completed, ' ' if not>] <desc> (from: <startDT> to: <endDateTime>)"
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)",
-                super.toString(), startDateTime, endDateTime);
+        return String.format("[%s]%s (from: %s to: %s)",
+                getSymbol(), super.toString(), startDateTime, endDateTime);
     }
 
 }
