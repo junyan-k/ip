@@ -1,5 +1,7 @@
 package uxie.tasks;
 
+import java.util.List;
+
 /**
  * ToDos are Tasks without any date/time attached.
  *
@@ -18,6 +20,16 @@ public class ToDo extends Task {
     @Override
     public String getSymbol() {
         return "T";
+    }
+
+    /**
+     * Returns time arguments in order.
+     *
+     * @return empty list
+     */
+    @Override
+    public List<String> getTimeArguments() {
+        return List.of();
     }
 
     /**

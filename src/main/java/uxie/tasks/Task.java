@@ -2,6 +2,8 @@ package uxie.tasks;
 
 import uxie.exceptions.UxieIllegalOpException;
 
+import java.util.List;
+
 /**
  * Tasks are tasks to be completed.
  *
@@ -63,6 +65,11 @@ public abstract class Task {
      * Returns task type symbol.
      */
     public abstract String getSymbol();
+
+    /**
+     * Returns all time arguments in order.
+     */
+    public abstract List<String> getTimeArguments();
 
     /**
      * Returns this Task as String.

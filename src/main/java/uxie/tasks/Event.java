@@ -1,5 +1,7 @@
 package uxie.tasks;
 
+import java.util.List;
+
 /**
  * Events are Tasks that start and end at a specific date/time.
  * (note: date/time is represented by String to allow for more
@@ -28,6 +30,16 @@ public class Event extends Task {
     @Override
     public String getSymbol() {
         return "E";
+    }
+
+    /**
+     * Returns time arguments in order.
+     *
+     * @return list containing from, to in order
+     */
+    @Override
+    public List<String> getTimeArguments() {
+        return List.of(startDateTime, endDateTime);
     }
 
     /**

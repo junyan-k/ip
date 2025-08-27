@@ -1,5 +1,7 @@
 package uxie.tasks;
 
+import java.util.List;
+
 /**
  * Deadlines are Tasks that need to be done by a specific date/time.
  * (note: date/time is represented by String to allow for more
@@ -24,6 +26,16 @@ public class Deadline extends Task {
     @Override
     public String getSymbol() {
         return "D";
+    }
+
+    /**
+     * Returns time arguments in order.
+     *
+     * @return list containing deadline
+     */
+    @Override
+    public List<String> getTimeArguments() {
+        return List.of(deadline);
     }
 
     /**
