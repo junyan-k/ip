@@ -1,7 +1,6 @@
 package uxie.interfaces;
 
 import uxie.exceptions.UxieIOException;
-import uxie.exceptions.UxieIllegalOpException;
 import uxie.tasks.Deadline;
 import uxie.tasks.Event;
 import uxie.tasks.Task;
@@ -75,7 +74,7 @@ public class Storage {
      *
      * @throws UxieIOException I/O exception during editing of file.
      */
-    public static void markTaskCompleted(int index) throws UxieIOException {
+    public static void toggleTaskCompletion(int index) throws UxieIOException {
         try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()));
              CSVWriter taskFileWriter = new CSVWriter(new FileWriter(getTaskFile()))) {
             List<String[]> taskRows = taskFileReader.readAll();
