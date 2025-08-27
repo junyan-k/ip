@@ -38,8 +38,8 @@ public class Uxie {
         Scanner s = new Scanner(System.in);
         // empty variables to use during switch (these are NOT reset after loop so take care)
         int taskIndex; Task task; String desc; String time1; String time2;
-        boolean running = true;
-        while (running) {
+        boolean isRunning = true;
+        while (isRunning) {
             String userCommand = s.nextLine(); // get next command
             List<String> splitCommand = new ArrayList<>(List.of(userCommand.split(" ")));
             System.out.println(LINE_BREAK);
@@ -168,7 +168,7 @@ public class Uxie {
 
                 case "goodbye":
                 case "bye": // exits program
-                    running = false;
+                    isRunning = false;
                     break;
 
                 default: // unrecognized command
@@ -177,7 +177,7 @@ public class Uxie {
             } catch (UxieException e) {
                 System.out.printf("    %s\n", e);
             }
-            if (running) { System.out.println(LINE_BREAK); }
+            if (isRunning) { System.out.println(LINE_BREAK); }
         }
 
         // Goodbye
