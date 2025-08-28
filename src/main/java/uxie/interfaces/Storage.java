@@ -15,7 +15,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,10 +55,10 @@ public class Storage {
      * @throws UxieIOException I/O exception during writing of file
      */
     public static void storeTask(Task task) throws UxieIOException {
-        List<String> arguments = Arrays.asList(
-                task.getSymbol(),
-                String.valueOf(task.isCompleted() ? 1 : 0),
-                task.getDesc());
+        List<String> arguments = new ArrayList<>();
+        arguments.add(task.getSymbol());
+        arguments.add(task.isCompleted() ? "1" : "0");
+        arguments.add(task.getDesc());
         arguments.addAll(task.getTimeArguments());
 
         try (CSVWriter taskFileWriter = new CSVWriter(new FileWriter(getTaskFile(), true))) {
@@ -75,12 +74,16 @@ public class Storage {
      * @throws UxieIOException I/O exception during editing of file.
      */
     public static void toggleTaskCompletion(int index) throws UxieIOException {
-        try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()));
-             CSVWriter taskFileWriter = new CSVWriter(new FileWriter(getTaskFile()))) {
+        try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()))) {
             List<String[]> taskRows = taskFileReader.readAll();
+            taskFileReader.close();
+
             String[] taskRow = taskRows.get(index);
             taskRow[1] = taskRow[1].equals("0") ? "1" : "0";
+
+            CSVWriter taskFileWriter = new CSVWriter(new FileWriter(getTaskFile()));
             taskFileWriter.writeAll(taskRows);
+            taskFileWriter.close();
         } catch (IOException | CsvException e) {
             throw new UxieIOException("I can't seem to edit this marking.");
         }
@@ -133,6 +136,8 @@ public class Storage {
     public static List<Task> readTasks() throws UxieIOException {
         try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()))) {
             List<String[]> taskRows = taskFileReader.readAll();
+            taskFileReader.close();
+
             List<Task> tasks = new ArrayList<>();
             for (String[] taskRow: taskRows) {
                 Optional<Task> maybeTask = convertTaskRow(taskRow);
@@ -150,11 +155,14 @@ public class Storage {
      * @throws UxieIOException I/O Exception during deleting of line
      */
     public static void deleteTask(int index) throws UxieIOException {
-        try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()));
-             CSVWriter taskFileWriter = new CSVWriter(new FileWriter(getTaskFile()))) {
+        try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()))) {
             List<String[]> taskRows = taskFileReader.readAll();
             taskRows.remove(index);
+            taskFileReader.close();
+
+            CSVWriter taskFileWriter = new CSVWriter(new FileWriter(getTaskFile()));
             taskFileWriter.writeAll(taskRows);
+            taskFileWriter.close();
         } catch (IOException | CsvException e) {
             throw new UxieIOException("I can't seem to delete this task.");
         }

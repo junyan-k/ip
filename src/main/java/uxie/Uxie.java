@@ -1,8 +1,10 @@
 package uxie;
 
 import uxie.exceptions.UxieException;
+import uxie.exceptions.UxieIOException;
 import uxie.exceptions.UxieIllegalOpException;
 import uxie.exceptions.UxieSyntaxException;
+import uxie.interfaces.Storage;
 import uxie.tasks.Deadline;
 import uxie.tasks.Event;
 import uxie.tasks.Task;
@@ -24,7 +26,7 @@ public class Uxie {
     // used to space messages
     private final static String LINE_BREAK =
             "    ____________________________________________________________";
-    private final static List<Task> tasks = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         // Output: Welcome (could avoid hardcoding these greetings in future)
@@ -33,6 +35,13 @@ public class Uxie {
         System.out.println("    Uxie uxie, or whatever.");
         System.out.println("    Dare I ask why you have summoned me?");
         System.out.println(LINE_BREAK);
+
+        // Initialize
+        try {
+            tasks = Storage.readTasks();
+        } catch (UxieIOException e) {
+            System.out.printf("    %s\n", e);
+        }
 
         // Receive commands
         Scanner s = new Scanner(System.in);
@@ -59,6 +68,7 @@ public class Uxie {
                     }
                     task = tasks.get(taskIndex - 1);
                     task.markCompleted();
+                    Storage.toggleTaskCompletion(taskIndex - 1);
                     System.out.printf("    Task %s (%s) is done. Congratulations.\n",
                             taskIndex, task.getDesc());
                     break;
@@ -70,6 +80,7 @@ public class Uxie {
                     }
                     task = tasks.get(taskIndex - 1);
                     task.markIncomplete();
+                    Storage.toggleTaskCompletion(taskIndex - 1);
                     System.out.printf("    Forgot something? Task %s (%s) is now incomplete.\n",
                             taskIndex, task.getDesc());
                     break;
@@ -81,6 +92,7 @@ public class Uxie {
                     }
                     task = tasks.get(taskIndex - 1);
                     tasks.remove(taskIndex - 1);
+                    Storage.deleteTask(taskIndex - 1);
                     System.out.printf("    Good to be realistic. Task %s (%s) has been deleted.\n",
                             taskIndex, task.getDesc());
                     break;
@@ -95,6 +107,7 @@ public class Uxie {
                     }
                     task = new ToDo(desc);
                     tasks.add(task);
+                    Storage.storeTask(task);
                     System.out.printf("    Alright. Task added:\n      %s\n" +
                                     "    You have %s total tasks. Best of luck.\n",
                             task, tasks.size());
@@ -123,6 +136,7 @@ public class Uxie {
                     time1 = String.join(" ", splitCommand.subList(byIndex + 1, splitCommand.size()));
                     task = new Deadline(desc, time1);
                     tasks.add(task);
+                    Storage.storeTask(task);
                     System.out.printf("    Alright. Task added:\n      %s\n    You have %s total tasks. " +
                                     "But we all know you'll just rush them at the last minute like you always do.\n",
                             task, tasks.size());
@@ -162,6 +176,7 @@ public class Uxie {
                     time2 = String.join(" ", splitCommand.subList(toIndex + 1, splitCommand.size()));
                     task = new Event(desc, time1, time2);
                     tasks.add(task);
+                    Storage.storeTask(task);
                     System.out.printf("    Alright. Task added:\n      %s\n    You have %s total tasks. Have fun.\n",
                             task, tasks.size());
                     break;
