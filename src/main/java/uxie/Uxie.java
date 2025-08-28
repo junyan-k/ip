@@ -4,12 +4,16 @@ import uxie.exceptions.UxieException;
 import uxie.exceptions.UxieIOException;
 import uxie.exceptions.UxieIllegalOpException;
 import uxie.exceptions.UxieSyntaxException;
+import uxie.interfaces.DateTimeParse;
 import uxie.interfaces.Storage;
 import uxie.tasks.Deadline;
 import uxie.tasks.Event;
 import uxie.tasks.Task;
 import uxie.tasks.ToDo;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -46,7 +50,7 @@ public class Uxie {
         // Receive commands
         Scanner s = new Scanner(System.in);
         // empty variables to use during switch (these are NOT reset after loop so take care)
-        int taskIndex; Task task; String desc; String time1; String time2;
+        int taskIndex; Task task; String desc; LocalDateTime time1; LocalDateTime time2;
         boolean isRunning = true;
         while (isRunning) {
             String userCommand = s.nextLine(); // get next command
@@ -133,7 +137,8 @@ public class Uxie {
                     }
 
                     desc = String.join(" ", splitCommand.subList(0, byIndex));
-                    time1 = String.join(" ", splitCommand.subList(byIndex + 1, splitCommand.size()));
+                    time1 = DateTimeParse.inputParse(
+                            String.join(" ", splitCommand.subList(byIndex + 1, splitCommand.size())));
                     task = new Deadline(desc, time1);
                     tasks.add(task);
                     Storage.storeTask(task);
@@ -172,8 +177,10 @@ public class Uxie {
                     }
 
                     desc = String.join(" ", splitCommand.subList(0, fromIndex));
-                    time1 = String.join(" ", splitCommand.subList(fromIndex + 1, toIndex));
-                    time2 = String.join(" ", splitCommand.subList(toIndex + 1, splitCommand.size()));
+                    time1 = DateTimeParse.inputParse(
+                            String.join(" ", splitCommand.subList(fromIndex + 1, toIndex)));
+                    time2 = DateTimeParse.inputParse(
+                            String.join(" ", splitCommand.subList(toIndex + 1, splitCommand.size())));
                     task = new Event(desc, time1, time2);
                     tasks.add(task);
                     Storage.storeTask(task);

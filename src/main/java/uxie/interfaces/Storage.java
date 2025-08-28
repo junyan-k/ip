@@ -1,6 +1,8 @@
 package uxie.interfaces;
 
 import uxie.exceptions.UxieIOException;
+import uxie.exceptions.UxieSyntaxException;
+import uxie.interfaces.DateTimeParse;
 import uxie.tasks.Deadline;
 import uxie.tasks.Event;
 import uxie.tasks.Task;
@@ -14,6 +16,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -59,7 +62,9 @@ public class Storage {
         arguments.add(task.getSymbol());
         arguments.add(task.isCompleted() ? "1" : "0");
         arguments.add(task.getDesc());
-        arguments.addAll(task.getTimeArguments());
+        for (LocalDateTime dt: task.getTimeArguments()) {
+            arguments.add(DateTimeParse.storageWriteParse(dt));
+        }
 
         try (CSVWriter taskFileWriter = new CSVWriter(new FileWriter(getTaskFile(), true))) {
             taskFileWriter.writeNext(arguments.toArray(new String[0]));
@@ -100,29 +105,36 @@ public class Storage {
         if (!arguments[1].matches("[01]") || arguments[2].isBlank()) {
             return Optional.empty();
         }
-        switch (arguments[0]) {
-        case "T":
-            if (arguments.length == 3) { // valid
-                return Optional.of(new ToDo(arguments[1].equals("1"), arguments[2]));
-            }
-            break;
+        try {
+            switch (arguments[0]) {
+                case "T":
+                    if (arguments.length == 3) { // valid
+                        return Optional.of(new ToDo(arguments[1].equals("1"), arguments[2]));
+                    }
+                    break;
 
-        case "D":
-            if (arguments.length == 4 && !arguments[3].isBlank()) { // valid
-                return Optional.of(new Deadline(arguments[1].equals("1"), arguments[2], arguments[3]));
-            }
-            break;
+                case "D":
+                    if (arguments.length == 4 && !arguments[3].isBlank()) { // valid
+                        return Optional.of(new Deadline(arguments[1].equals("1"), arguments[2],
+                                DateTimeParse.storageReadParse(arguments[3])));
+                    }
+                    break;
 
-        case "E":
-            if (arguments.length == 5 && !arguments[3].isBlank() && !arguments[4].isBlank()) { // valid
-                return Optional.of(
-                        new Event(arguments[1].equals("1"), arguments[2], arguments[3], arguments[4])
-                );
-            }
-            break;
+                case "E":
+                    if (arguments.length == 5 && !arguments[3].isBlank() && !arguments[4].isBlank()) { // valid
+                        return Optional.of(
+                                new Event(arguments[1].equals("1"), arguments[2],
+                                        DateTimeParse.storageReadParse(arguments[3]),
+                                        DateTimeParse.storageReadParse(arguments[4]))
+                        );
+                    }
+                    break;
 
-        default:
-            // task symbol not recognized
+                default:
+                    // task symbol not recognized
+                    return Optional.empty();
+            }
+        } catch (UxieSyntaxException e) {
             return Optional.empty();
         }
         return Optional.empty();

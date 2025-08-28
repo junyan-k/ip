@@ -1,5 +1,8 @@
 package uxie.tasks;
 
+import uxie.interfaces.DateTimeParse;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -12,19 +15,19 @@ import java.util.List;
 public class Event extends Task {
 
     /** Starting date/time. */
-    private String startDateTime;
+    private LocalDateTime startDateTime;
 
     /** Ending date/time */
-    private String endDateTime;
+    private LocalDateTime endDateTime;
 
 
-    public Event(String desc, String startDateTime, String endDateTime) {
+    public Event(String desc, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(desc);
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
 
-    public Event(boolean isCompleted, String desc, String startDateTime, String endDateTime) {
+    public Event(boolean isCompleted, String desc, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(isCompleted, desc);
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
@@ -44,7 +47,7 @@ public class Event extends Task {
      * @return list containing from, to in order
      */
     @Override
-    public List<String> getTimeArguments() {
+    public List<LocalDateTime> getTimeArguments() {
         return List.of(startDateTime, endDateTime);
     }
 
@@ -55,7 +58,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[%s]%s (from: %s to: %s)",
-                getSymbol(), super.toString(), startDateTime, endDateTime);
+                getSymbol(), super.toString(), DateTimeParse.outputParse(startDateTime),
+                DateTimeParse.outputParse(endDateTime));
     }
 
 }

@@ -1,5 +1,6 @@
 package uxie.tasks;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class ToDo extends Task {
      * @return empty list
      */
     @Override
-    public List<String> getTimeArguments() {
+    public List<LocalDateTime> getTimeArguments() {
         return List.of();
     }
 
