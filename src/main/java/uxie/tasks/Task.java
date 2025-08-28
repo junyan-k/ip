@@ -2,6 +2,7 @@ package uxie.tasks;
 
 import uxie.exceptions.UxieIllegalOpException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -74,7 +75,7 @@ public abstract class Task {
     /**
      * Returns all time arguments in order.
      */
-    public abstract List<String> getTimeArguments();
+    public abstract List<LocalDateTime> getTimeArguments();
 
     /**
      * Returns this Task as String.

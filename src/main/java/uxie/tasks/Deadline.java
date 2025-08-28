@@ -1,5 +1,9 @@
 package uxie.tasks;
 
+import uxie.interfaces.DateTimeParse;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -12,15 +16,15 @@ import java.util.List;
 public class Deadline extends Task {
 
     /** Deadline of task. */
-    private String deadline;
+    private LocalDateTime deadline;
 
 
-    public Deadline(String desc, String deadline) {
+    public Deadline(String desc, LocalDateTime deadline) {
         super(desc);
         this.deadline = deadline;
     }
 
-    public Deadline(boolean isCompleted, String desc, String deadline) {
+    public Deadline(boolean isCompleted, String desc, LocalDateTime deadline) {
         super(isCompleted, desc);
         this.deadline = deadline;
     }
@@ -34,12 +38,12 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns time arguments in order.
+     * Returns time arguments in order as String.
      *
      * @return list containing deadline
      */
     @Override
-    public List<String> getTimeArguments() {
+    public List<LocalDateTime> getTimeArguments() {
         return List.of(deadline);
     }
 
@@ -49,7 +53,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", getSymbol(), super.toString(), deadline);
+        return String.format("[%s]%s (by: %s)",
+                getSymbol(), super.toString(), DateTimeParse.outputParse(deadline));
     }
 
 }
