@@ -30,6 +30,8 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) {
         tasks.addTask(task);
+        ui.uxiePrintln(String.format("Alright. Task added:\n  %s\nYou have %s total tasks. Have fun.",
+                task, tasks.size()));
     }
 
     /**

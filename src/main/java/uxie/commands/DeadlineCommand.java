@@ -29,6 +29,9 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) {
         tasks.addTask(task);
+        ui.uxiePrintln(String.format("Alright. Task added:\n  %s\nYou have %s total tasks. " +
+                        "But we all know you'll just rush them at the last minute like you always do.",
+                task, tasks.size()));
     }
 
     /**

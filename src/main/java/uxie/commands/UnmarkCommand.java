@@ -24,7 +24,8 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) {
         try {
-            tasks.markIncomplete(taskIndex);
+            String desc = tasks.markIncomplete(taskIndex);
+            ui.uxiePrintln(String.format("Forgot something? Task %s (%s) is now incomplete.", taskIndex, desc));
         } catch (UxieIllegalOpException e) {
             ui.printException(e);
         }

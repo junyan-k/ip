@@ -28,6 +28,8 @@ public class TodoCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) {
         tasks.addTask(task);
+        ui.uxiePrintln(String.format("Alright. Task added:\n  %s\n" +
+                "You have %s total tasks. Best of luck.", task, tasks.size()));
     }
 
     /**
