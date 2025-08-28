@@ -2,12 +2,14 @@ package uxie.tasks;
 
 import uxie.exceptions.UxieIllegalOpException;
 
+import java.util.List;
+
 /**
  * Tasks are tasks to be completed.
  *
  * @author junyan-k
  */
-public class Task {
+public abstract class Task {
 
     /** Whether Task is completed. */
     private boolean isCompleted;
@@ -19,6 +21,11 @@ public class Task {
     public Task(String desc) {
         this.desc = desc;
         this.isCompleted = false;
+    }
+
+    public Task(boolean isCompleted, String desc) {
+        this.desc = desc;
+        this.isCompleted = isCompleted;
     }
 
     /**
@@ -60,11 +67,21 @@ public class Task {
     }
 
     /**
+     * Returns task type symbol.
+     */
+    public abstract String getSymbol();
+
+    /**
+     * Returns all time arguments in order.
+     */
+    public abstract List<String> getTimeArguments();
+
+    /**
      * Returns this Task as String.
      * Format: "[<X if complete, blank if not>] <desc>"
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.completed ? "X" : " ", this.desc);
+        return String.format("[%s] %s", this.isCompleted ? "X" : " ", this.desc);
     }
 }

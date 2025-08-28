@@ -1,5 +1,7 @@
 package uxie.tasks;
 
+import java.util.List;
+
 /**
  * ToDos are Tasks without any date/time attached.
  *
@@ -12,13 +14,35 @@ public class ToDo extends Task {
         super(desc);
     }
 
+    public ToDo(boolean isCompleted, String desc) {
+        super(isCompleted, desc);
+    }
+
+    /**
+     * Returns task type symbol. ("T")
+     */
+    @Override
+    public String getSymbol() {
+        return "T";
+    }
+
+    /**
+     * Returns time arguments in order.
+     *
+     * @return empty list
+     */
+    @Override
+    public List<String> getTimeArguments() {
+        return List.of();
+    }
+
     /**
      * Returns ToDos as String.
      * Format: "[T][<'X' if completed, ' ' if not>] <desc>"
      */
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s", getSymbol(), super.toString());
     }
 
 }
