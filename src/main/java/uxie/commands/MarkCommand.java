@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
     public void execute(TaskList tasks, Ui ui) {
         try {
             String desc = tasks.markCompleted(taskIndex);
-            ui.uxiePrintln(String.format("Task %s (%s) is done. Congratulations.", taskIndex, desc));
+            ui.uxiePrintln(String.format("Task %s (%s) is done. Congratulations.", taskIndex + 1, desc));
         } catch (UxieIllegalOpException e) {
             ui.printException(e);
         }

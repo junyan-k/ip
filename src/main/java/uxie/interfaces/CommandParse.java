@@ -24,21 +24,21 @@ public class CommandParse {
 
             case "mark": // mark task <n> as completed
                 try {
-                    return new MarkCommand(Integer.parseInt(splitCommand.get(1)));
+                    return new MarkCommand(Integer.parseInt(splitCommand.get(1)) - 1);
                 } catch (NumberFormatException e) {
                     throw new UxieSyntaxException("That index doesn't seem right.");
                 }
 
             case "unmark": // mark task <n> as incomplete
                 try {
-                    return new UnmarkCommand(Integer.parseInt(splitCommand.get(1)));
+                    return new UnmarkCommand(Integer.parseInt(splitCommand.get(1)) - 1);
                 } catch (NumberFormatException e) {
                     throw new UxieSyntaxException("That index doesn't seem right.");
                 }
 
             case "delete": // delete task from tasks
                 try {
-                    return new DeleteCommand(Integer.parseInt(splitCommand.get(1)));
+                    return new DeleteCommand(Integer.parseInt(splitCommand.get(1)) - 1);
                 } catch (NumberFormatException e) {
                     throw new UxieSyntaxException("That index doesn't seem right.");
                 }
