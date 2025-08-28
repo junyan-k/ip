@@ -26,7 +26,7 @@ public class Ui {
      * Prints string with Uxie's indentation.
      */
     public void uxiePrintln(String str) {
-        System.out.println(str.indent(INDENTATION));
+        System.out.print(str.indent(INDENTATION));
     }
 
     /**
@@ -52,7 +52,6 @@ public class Ui {
      */
     public void printGoodbye() {
         uxiePrintln("That is all? Very well. Goodbye.");
-        printLineBreak();
     }
 
     /**
