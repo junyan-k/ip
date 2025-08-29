@@ -5,25 +5,32 @@ import uxie.exceptions.UxieException;
 import java.util.Scanner;
 
 /**
- * Manages UI of Uxie.
+ * Represents UI of Uxie.
+ *
+ * @author junyan-k
  */
-
 public class Ui {
 
-    // used to space messages (60 characters)
+    /** Used to space messages (60 characters). */
     private final static String LINE_BREAK =
             "____________________________________________________________";
-    // no. of lines to indent
+
+    /** Number of whitespace characters to indent Uxie's messages with. */
     private final static int INDENTATION = 4;
 
+    /** Scanner to obtain user input. */
     private final Scanner input;
 
+    /**
+     * Generates a Ui. Initializes input Scanner with {@link java.lang.System#in}.
+     */
     public Ui() {
         input = new Scanner(System.in);
     }
 
     /**
-     * Prints string with Uxie's indentation.
+     * Prints string with Uxie's indentation, and a new line.
+     * @see #INDENTATION
      */
     public void uxiePrintln(String str) {
         System.out.print(str.indent(INDENTATION));
@@ -31,6 +38,7 @@ public class Ui {
 
     /**
      * Prints line break.
+     * @see #LINE_BREAK
      */
     public void printLineBreak() {
         uxiePrintln(LINE_BREAK);
@@ -48,28 +56,29 @@ public class Ui {
     }
 
     /**
-     * Prints goodbye.
+     * Prints goodbye message.
      */
     public void printGoodbye() {
         uxiePrintln("That is all? Very well. Goodbye.");
     }
 
     /**
-     * Display UxieException.
+     * Prints UxieException.
+     * Uses the toString function of UxieException or its subclasses.
      */
     public void printException(UxieException e) {
         uxiePrintln(e.toString());
     }
 
     /**
-     * Read and return next command.
+     * Reads and returns next command.
      */
     public String readCommand() {
         return input.nextLine();
     }
 
     /**
-     * Close scanner.
+     * Closes input Scanner.
      */
     public void closeScanner() {
         input.close();
