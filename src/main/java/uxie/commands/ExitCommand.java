@@ -11,12 +11,16 @@ import uxie.interfaces.Ui;
  */
 public class ExitCommand extends Command {
 
+    /**
+     * Generates an ExitCommand.
+     */
     public ExitCommand() {
 
     }
 
     /**
-     * Executes command. (does nothing)
+     * {@inheritDoc}
+     * Prints goodbye message and closes Scanner in Ui.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -25,7 +29,8 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Whether this command is exit. (true)
+     * {@inheritDoc}
+     * Returns true.
      */
     @Override
     public boolean isExit() {

@@ -16,15 +16,24 @@ public class TodoCommand extends Command {
     /** Task to be added. */
     private ToDo task;
 
+    /**
+     * Generates TodoCommand with parameters for ToDo.
+     * @see uxie.tasks.ToDo#ToDo(String)
+     */
     public TodoCommand(String desc) {
         task = new ToDo(desc);
     }
 
+    /**
+     * Generates TodoCommand with parameters for ToDo.
+     * @see uxie.tasks.ToDo#ToDo(boolean, String)
+     */
     public TodoCommand(boolean isCompleted, String desc) {
         task = new ToDo(isCompleted, desc);
     }
 
     /**
+     * {@inheritDoc}
      * Adds the Todo to the TaskList.
      */
     @Override
@@ -40,7 +49,8 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Returns whether this command is exit. (false)
+     * {@inheritDoc}
+     * Returns false.
      */
     @Override
     public boolean isExit() {
@@ -48,7 +58,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Returns true if both TodoCommands are equal.
+     * Returns true if provided object is equal to this TodoCommand.
      * Two TodoCommands are equal if they contain equal Todos.
      */
     @Override

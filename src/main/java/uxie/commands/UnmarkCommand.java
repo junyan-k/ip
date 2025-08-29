@@ -13,14 +13,18 @@ import uxie.interfaces.Ui;
  */
 public class UnmarkCommand extends Command {
 
-    /** Index of task to mark complete.*/
+    /** Index of task to mark incomplete. */
     private final int taskIndex;
 
+    /**
+     * Generates UnmarkCommand with index of task to mark incomplete.
+     */
     public UnmarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     /**
+     * {@inheritDoc}
      * Marks task matching index in TaskList as complete.
      */
     @Override
@@ -35,7 +39,8 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Returns whether this command is exit. (false)
+     * {@inheritDoc}
+     * Returns false.
      */
     @Override
     public boolean isExit() {

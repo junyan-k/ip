@@ -13,14 +13,18 @@ import uxie.interfaces.Ui;
  */
 public class MarkCommand extends Command {
 
-    /** Index of task to mark complete.*/
+    /** Index of task to mark complete. */
     private final int taskIndex;
 
+    /**
+     * Generates MarkCommand with index of task to mark as complete.
+     */
     public MarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     /**
+     * {@inheritDoc}
      * Marks task matching index in TaskList as complete.
      */
     @Override
@@ -35,7 +39,8 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Returns whether this command is exit. (false)
+     * {@inheritDoc}
+     * Returns false.
      */
     @Override
     public boolean isExit() {
@@ -43,7 +48,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Returns true if both MarkCommands are equal.
+     * Returns true if provided object is equal to this MarkCommand.
      * Two MarkCommands are equal if they have the same index.
      */
     @Override
