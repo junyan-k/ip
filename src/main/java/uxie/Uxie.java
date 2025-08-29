@@ -13,21 +13,26 @@ import uxie.interfaces.Ui;
  *
  * @author junyan-k
  */
-
 public class Uxie {
 
+    /** List of tasks. */
     private TaskList tasks;
+
+    /** User interface of Uxie. */
     private Ui ui;
+
+    /** Local storage interface. */
     private Storage storage;
 
     /**
      * Initializes Uxie.
-     * Generates Ui. Reads Tasks from file to generate TaskList.
+     * Generates Ui.
+     * Reads Tasks from default task filepath to generate TaskList.
      */
     public Uxie() {
         // initialization
         ui = new Ui();
-        storage = new Storage("./tasks.csv");
+        storage = new Storage(); // see uxie.storage.Storage for default taskFilePath
         try {
             tasks = new TaskList(storage.readTasks());
         } catch (UxieIOException e) {
@@ -37,7 +42,24 @@ public class Uxie {
     }
 
     /**
-     * Run the Uxie program.
+     * Initializes Uxie.
+     * Generates Ui.
+     * Reads Tasks from specified task filepath to generate TaskList.
+     */
+    public Uxie(String taskFilePath) {
+        // initialization
+        ui = new Ui();
+        storage = new Storage(taskFilePath);
+        try {
+            tasks = new TaskList(storage.readTasks());
+        } catch (UxieIOException e) {
+            ui.printException(e);
+            tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Runs the Uxie program.
      * Includes body of program loop.
      */
     public void run() {
