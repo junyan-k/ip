@@ -41,4 +41,16 @@ public class MarkCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    /**
+     * Returns true if both MarkCommands are equal.
+     * Two MarkCommands are equal if they have the same index.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof MarkCommand) {
+            return ((MarkCommand) o).taskIndex == this.taskIndex;
+        }
+        return false;
+    }
 }

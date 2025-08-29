@@ -62,4 +62,18 @@ public class Event extends Task {
                 DateTimeParse.outputParse(endDateTime));
     }
 
+    /**
+     * Returns true if both Events are equal.
+     * Two Todos are equal if they have the same description, to and from LDTs.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Event e) {
+            return e.getDesc().equals(this.getDesc()) &&
+                    e.startDateTime.equals(this.startDateTime) &&
+                    e.endDateTime.equals(this.endDateTime);
+        }
+        return false;
+    }
+
 }

@@ -57,4 +57,17 @@ public class Deadline extends Task {
                 getSymbol(), super.toString(), DateTimeParse.outputParse(deadline));
     }
 
+    /**
+     * Returns true if both Deadlines are equal.
+     * Two Todos are equal if they have the same description and by LDTs.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Deadline d) {
+            return d.getDesc().equals(this.getDesc()) &&
+                    d.deadline.equals(this.deadline);
+        }
+        return false;
+    }
+
 }

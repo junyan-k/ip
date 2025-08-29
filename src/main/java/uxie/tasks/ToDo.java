@@ -46,4 +46,15 @@ public class ToDo extends Task {
         return String.format("[%s]%s", getSymbol(), super.toString());
     }
 
+    /**
+     * Returns true if both Todos are equal.
+     * Two Todos are equal if they have the same description.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof ToDo) {
+            return ((ToDo) o).getDesc().equals(this.getDesc());
+        }
+        return false;
+    }
 }

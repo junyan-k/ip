@@ -47,4 +47,16 @@ public class TodoCommand extends Command {
         return false;
     }
 
+    /**
+     * Returns true if both TodoCommands are equal.
+     * Two TodoCommands are equal if they contain equal Todos.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof TodoCommand) {
+            return ((TodoCommand) o).task.equals(this.task);
+        }
+        return false;
+    }
+
 }
