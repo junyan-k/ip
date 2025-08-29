@@ -1,5 +1,6 @@
 package uxie.commands;
 
+import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
 import uxie.interfaces.Ui;
 
@@ -18,7 +19,7 @@ public class ExitCommand extends Command {
      * Executes command. (does nothing)
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printGoodbye();
         ui.closeScanner();
     }

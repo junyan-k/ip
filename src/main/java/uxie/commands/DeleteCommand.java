@@ -1,6 +1,8 @@
 package uxie.commands;
 
+import uxie.exceptions.UxieIOException;
 import uxie.exceptions.UxieIllegalOpException;
+import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
 import uxie.interfaces.Ui;
 
@@ -22,11 +24,12 @@ public class DeleteCommand extends Command {
      * Deletes task matching index from TaskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String desc = tasks.deleteTask(taskIndex);
+            storage.deleteTask(taskIndex);
             ui.uxiePrintln(String.format("Good to be realistic. Task %s (%s) has been deleted.", taskIndex + 1, desc));
-        } catch (UxieIllegalOpException e) {
+        } catch (UxieIllegalOpException | UxieIOException e) {
             ui.printException(e);
         }
     }

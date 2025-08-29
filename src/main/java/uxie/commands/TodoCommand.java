@@ -1,5 +1,7 @@
 package uxie.commands;
 
+import uxie.exceptions.UxieIOException;
+import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
 import uxie.interfaces.Ui;
 import uxie.tasks.ToDo;
@@ -26,8 +28,13 @@ public class TodoCommand extends Command {
      * Adds the Todo to the TaskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
+        try {
+            storage.storeTask(task);
+        } catch (UxieIOException e) {
+            ui.printException(e);
+        }
         ui.uxiePrintln(String.format("Alright. Task added:\n  %s\n" +
                 "You have %s total tasks. Best of luck.", task, tasks.size()));
     }

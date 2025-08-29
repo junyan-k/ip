@@ -1,5 +1,7 @@
 package uxie.commands;
 
+import uxie.exceptions.UxieIOException;
+import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
 import uxie.interfaces.Ui;
 import uxie.tasks.Event;
@@ -28,8 +30,13 @@ public class EventCommand extends Command {
      * Adds the Event to the TaskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
+        try {
+            storage.storeTask(task);
+        } catch (UxieIOException e) {
+            ui.printException(e);
+        }
         ui.uxiePrintln(String.format("Alright. Task added:\n  %s\nYou have %s total tasks. Have fun.",
                 task, tasks.size()));
     }

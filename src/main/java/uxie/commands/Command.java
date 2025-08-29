@@ -1,5 +1,6 @@
 package uxie.commands;
 
+import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
 import uxie.interfaces.Ui;
 
@@ -11,7 +12,7 @@ import uxie.interfaces.Ui;
 public abstract class Command {
 
     /** Executes command. */
-    public abstract void execute(TaskList tasks, Ui ui);
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     /** Only returns true if command is exit, else return false. */
     public abstract boolean isExit();

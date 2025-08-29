@@ -29,15 +29,23 @@ import java.util.Optional;
 public class Storage {
 
     /** File path to task file. */
-    private static final String TASK_FILEPATH = "./tasks.csv";
+    private String taskFilePath = "./tasks.csv";
+
+    public Storage() {
+
+    }
+
+    public Storage(String taskFilePath) {
+        this.taskFilePath = taskFilePath;
+    }
 
     /**
      * Returns local task CSV file.
      * If not found, creates it and returns.
      */
-    private static File getTaskFile() throws UxieIOException {
+    private File getTaskFile() throws UxieIOException {
         try {
-            File taskFile = new File(TASK_FILEPATH);
+            File taskFile = new File(taskFilePath);
             taskFile.createNewFile(); // creates file if it doesn't exist.
             return taskFile;
         } catch (IOException e) {
@@ -57,7 +65,7 @@ public class Storage {
      *
      * @throws UxieIOException I/O exception during writing of file
      */
-    public static void storeTask(Task task) throws UxieIOException {
+    public void storeTask(Task task) throws UxieIOException {
         List<String> arguments = new ArrayList<>();
         arguments.add(task.getSymbol());
         arguments.add(task.isCompleted() ? "1" : "0");
@@ -78,7 +86,7 @@ public class Storage {
      *
      * @throws UxieIOException I/O exception during editing of file.
      */
-    public static void toggleTaskCompletion(int index) throws UxieIOException {
+    public void toggleTaskCompletion(int index) throws UxieIOException {
         try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()))) {
             List<String[]> taskRows = taskFileReader.readAll();
             taskFileReader.close();
@@ -145,7 +153,7 @@ public class Storage {
      *
      * @throws UxieIOException I/O exception during reading of file.
      */
-    public static List<Task> readTasks() throws UxieIOException {
+    public List<Task> readTasks() throws UxieIOException {
         try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()))) {
             List<String[]> taskRows = taskFileReader.readAll();
             taskFileReader.close();
@@ -166,7 +174,7 @@ public class Storage {
      *
      * @throws UxieIOException I/O Exception during deleting of line
      */
-    public static void deleteTask(int index) throws UxieIOException {
+    public void deleteTask(int index) throws UxieIOException {
         try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()))) {
             List<String[]> taskRows = taskFileReader.readAll();
             taskRows.remove(index);

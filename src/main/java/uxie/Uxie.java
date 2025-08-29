@@ -18,6 +18,7 @@ public class Uxie {
 
     private TaskList tasks;
     private Ui ui;
+    private Storage storage;
 
     /**
      * Initializes Uxie.
@@ -26,8 +27,9 @@ public class Uxie {
     public Uxie() {
         // initialization
         ui = new Ui();
+        storage = new Storage("./tasks.csv");
         try {
-            tasks = new TaskList(Storage.readTasks());
+            tasks = new TaskList(storage.readTasks());
         } catch (UxieIOException e) {
             ui.printException(e);
             tasks = new TaskList();
@@ -46,7 +48,7 @@ public class Uxie {
                 String fullCommand = ui.readCommand();
                 ui.printLineBreak();
                 Command c = CommandParse.parse(fullCommand);
-                c.execute(tasks, ui);
+                c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (UxieException e) {
                 ui.printException(e);
