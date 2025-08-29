@@ -8,19 +8,29 @@ import java.util.List;
  *
  * @author junyan-k
  */
-
 public class ToDo extends Task {
 
+    /**
+     * Generates ToDo with provided description.
+     * ToDo is incomplete by default.
+     * @see Task#Task(String)
+     */
     public ToDo(String desc) {
         super(desc);
     }
 
+    /**
+     * Generates ToDo with provided description, and initialized completion status.
+     * @see Task#Task(boolean, String)
+     */
     public ToDo(boolean isCompleted, String desc) {
         super(isCompleted, desc);
     }
 
     /**
-     * Returns task type symbol. ("T")
+     * {@inheritDoc}
+     *
+     * @return "T"
      */
     @Override
     public String getSymbol() {
@@ -28,7 +38,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns time arguments in order.
+     * {@inheritDoc}
      *
      * @return empty list
      */

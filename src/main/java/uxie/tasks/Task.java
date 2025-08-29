@@ -18,12 +18,18 @@ public abstract class Task {
     /** Description of Task. */
     private String desc;
 
-
+    /**
+     * Generates Task with description.
+     * Task is incomplete by default.
+     */
     public Task(String desc) {
         this.desc = desc;
         this.isCompleted = false;
     }
 
+    /**
+     * Generates Task with description and specified completion status.
+     */
     public Task(boolean isCompleted, String desc) {
         this.desc = desc;
         this.isCompleted = isCompleted;
@@ -38,7 +44,8 @@ public abstract class Task {
 
     /**
      * Marks Task as complete.
-     * If Task is already complete, throws {@link UxieIllegalOpException}.
+     *
+     * @throws UxieIllegalOpException if Task is already complete.
      */
     public void markCompleted() throws UxieIllegalOpException {
         if (!this.isCompleted) {
@@ -50,7 +57,8 @@ public abstract class Task {
 
     /**
      * Marks Task as incomplete.
-     * If Task is already incomplete, throws {@link UxieIllegalOpException}.
+     *
+     * @throws UxieIllegalOpException if Task is already incomplete.
      */
     public void markIncomplete() throws UxieIllegalOpException {
         if (this.isCompleted) {
