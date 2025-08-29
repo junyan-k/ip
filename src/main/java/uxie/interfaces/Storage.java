@@ -27,14 +27,17 @@ import java.util.Optional;
  */
 public class Storage {
 
+    /** Default file path to task file. */
+    private static final String DEFAULT_TASK_FILEPATH = "./tasks.csv";
+
     /** File path to task file. */
-    private String taskFilePath = "./tasks.csv";
+    private final String taskFilePath;
 
     /**
-     * Generates Storage with default taskFilePath "./tasks.csv".
+     * Generates Storage with {@link #DEFAULT_TASK_FILEPATH}.
      */
     public Storage() {
-
+        taskFilePath = DEFAULT_TASK_FILEPATH;
     }
 
     /**
