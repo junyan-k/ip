@@ -43,6 +43,14 @@ public class CommandParse {
                     throw new UxieSyntaxException("That index doesn't seem right.");
                 }
 
+        case "find":
+            splitCommand.remove(0);
+            String searchString = String.join(" ", splitCommand);
+            if (searchString.isBlank()) {
+                // search is empty
+                throw new UxieSyntaxException("Your search string can't be empty.");
+            }
+            return new FindCommand(searchString);
 
             case "todo": // add task as a todos
                 splitCommand.remove(0); // remove command word
