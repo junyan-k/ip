@@ -38,7 +38,7 @@ public class DeadlineCommand extends Command {
         }
         ui.uxiePrintln(String.format("Alright. Task added:\n  %s\nYou have %s total tasks. "
                         + "But we all know you'll just rush them at the last minute like you always do.",
-                task, tasks.size()));
+                task, tasks.getSize()));
     }
 
     /**

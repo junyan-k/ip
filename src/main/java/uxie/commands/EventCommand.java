@@ -39,7 +39,7 @@ public class EventCommand extends Command {
             ui.printException(e);
         }
         ui.uxiePrintln(String.format("Alright. Task added:\n  %s\nYou have %s total tasks. Have fun.",
-                task, tasks.size()));
+                task, tasks.getSize()));
     }
 
     /**

@@ -22,7 +22,7 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            for (int i = 1; i <= tasks.size(); i++) {
+            for (int i = 1; i <= tasks.getSize(); i++) {
                 ui.uxiePrintln(String.format("%s. %s", i, tasks.getTask(i - 1)));
             }
         } catch (UxieIllegalOpException e) {

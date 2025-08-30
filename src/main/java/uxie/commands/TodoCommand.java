@@ -36,7 +36,7 @@ public class TodoCommand extends Command {
             ui.printException(e);
         }
         ui.uxiePrintln(String.format("Alright. Task added:\n  %s\n"
-                + "You have %s total tasks. Best of luck.", task, tasks.size()));
+                + "You have %s total tasks. Best of luck.", task, tasks.getSize()));
     }
 
     /**
