@@ -22,7 +22,8 @@ public class EventCommand extends Command {
         task = new Event(desc, startDateTime, endDateTime);
     }
 
-    public EventCommand(boolean isCompleted, String desc, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public EventCommand(boolean isCompleted, String desc,
+                        LocalDateTime startDateTime, LocalDateTime endDateTime) {
         task = new Event(isCompleted, desc, startDateTime, endDateTime);
     }
 
@@ -48,4 +49,5 @@ public class EventCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 }
