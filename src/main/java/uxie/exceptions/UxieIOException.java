@@ -2,11 +2,16 @@ package uxie.exceptions;
 
 /**
  * Represents UxieExceptions related to file reading and I/O.
+ * Details are provided in message.
  *
  * @author junyan-k
  */
 public class UxieIOException extends UxieException {
 
+    /**
+     * Generates UxieIOException with provided message.
+     * @see uxie.exceptions.UxieException#UxieException(String)
+     */
     public UxieIOException(String msg) {
         super(msg);
     }

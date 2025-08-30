@@ -6,8 +6,14 @@ import uxie.tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a list of Tasks.
+ *
+ * @author junyan-k
+ */
 public class TaskList {
 
+    /** List of tasks. */
     private List<Task> tasks;
 
     /**
@@ -19,6 +25,8 @@ public class TaskList {
 
     /**
      * Generates initialized TaskList.
+     *
+     * @param tasks initial list of Tasks.
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
@@ -34,7 +42,7 @@ public class TaskList {
     /**
      * Deletes task matching index from list.
      *
-     * @return desc of deleted task
+     * @return description of deleted task
      * @throws UxieIllegalOpException taskIndex is out of bounds in list
      */
     public String deleteTask(int taskIndex) throws UxieIllegalOpException {
@@ -49,6 +57,8 @@ public class TaskList {
     /**
      * Return task matching index.
      *
+     * @param taskIndex index of task in list to return
+     * @return task matching index
      * @throws UxieIllegalOpException when taskIndex is out of bounds.
      */
     public Task getTask(int taskIndex) throws UxieIllegalOpException {
@@ -67,7 +77,8 @@ public class TaskList {
 
     /**
      * Marks task matching index as complete.
-     * Returns description of task marked complete.
+     *
+     * @return description of task marked complete.
      * @throws UxieIllegalOpException if task index is out of bounds or task is already complete.
      */
     public String markCompleted(int taskIndex) throws UxieIllegalOpException {
@@ -81,7 +92,8 @@ public class TaskList {
 
     /**
      * Marks task matching index as incomplete.
-     * Returns description of task marked incomplete.
+     *
+     * @return description of task marked incomplete.
      * @throws UxieIllegalOpException if task index is out of bounds or task is already incomplete.
      */
     public String markIncomplete(int taskIndex) throws UxieIllegalOpException {

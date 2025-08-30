@@ -12,15 +12,22 @@ import uxie.interfaces.Ui;
  */
 public class ListCommand extends Command {
 
+    /**
+     * Generates ListCommand.
+     */
     public ListCommand() {
 
     }
 
     /**
-     * Lists all Tasks.
+     * {@inheritDoc}
+     * Lists all Tasks in TaskList.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        if (tasks.size() == 0) {
+            ui.uxiePrintln("You don't have any tasks yet.");
+        }
         try {
             for (int i = 1; i <= tasks.size(); i++) {
                 ui.uxiePrintln(String.format("%s. %s", i, tasks.getTask(i - 1)));
@@ -31,7 +38,8 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Returns whether this command is exit. (false)
+     * {@inheritDoc}
+     * Returns false.
      */
     @Override
     public boolean isExit() {

@@ -15,7 +15,15 @@ import java.util.List;
  */
 public class CommandParse {
 
-    public static Command parse(String userCommand) throws UxieException {
+    /**
+     * Parses input String and returns corresponding Command.
+     * @see uxie.commands
+     *
+     * @param userCommand input String from user
+     * @return resulting Command object of specific type
+     * @throws UxieSyntaxException when userCommand is in incorrect format (e.g. missing arguments, unknown command)
+     */
+    public static Command parse(String userCommand) throws UxieSyntaxException {
         List<String> splitCommand = new ArrayList<>(List.of(userCommand.split(" ")));
 
         switch (splitCommand.get(0)) {

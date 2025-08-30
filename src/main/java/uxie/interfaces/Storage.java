@@ -2,7 +2,6 @@ package uxie.interfaces;
 
 import uxie.exceptions.UxieIOException;
 import uxie.exceptions.UxieSyntaxException;
-import uxie.interfaces.DateTimeParse;
 import uxie.tasks.Deadline;
 import uxie.tasks.Event;
 import uxie.tasks.Task;
@@ -28,13 +27,22 @@ import java.util.Optional;
  */
 public class Storage {
 
+    /** Default file path to task file. */
+    private static final String DEFAULT_TASK_FILEPATH = "./tasks.csv";
+
     /** File path to task file. */
-    private String taskFilePath = "./tasks.csv";
+    private final String taskFilePath;
 
+    /**
+     * Generates Storage with {@link #DEFAULT_TASK_FILEPATH}.
+     */
     public Storage() {
-
+        taskFilePath = DEFAULT_TASK_FILEPATH;
     }
 
+    /**
+     * Generates Storage with specified taskFilePath.
+     */
     public Storage(String taskFilePath) {
         this.taskFilePath = taskFilePath;
     }
@@ -42,6 +50,9 @@ public class Storage {
     /**
      * Returns local task CSV file.
      * If not found, creates it and returns.
+     *
+     * @return File object referencing local task CSV file.
+     * @throws UxieIOException I/O Exception encountered when trying to create new file
      */
     private File getTaskFile() throws UxieIOException {
         try {
@@ -63,6 +74,7 @@ public class Storage {
      * time1 (if needed): if Deadline, deadline. if Event, from
      * time2 (if needed): if Event, to
      *
+     * @param task Task to store.
      * @throws UxieIOException I/O exception during writing of file
      */
     public void storeTask(Task task) throws UxieIOException {
@@ -83,7 +95,9 @@ public class Storage {
 
     /**
      * Toggles completion status of task matching index.
+     * (complete -> incomplete and vice versa)
      *
+     * @param index row index of Task in CSV file.
      * @throws UxieIOException I/O exception during editing of file.
      */
     public void toggleTaskCompletion(int index) throws UxieIOException {
@@ -105,8 +119,8 @@ public class Storage {
     /**
      * Converts array of Strings into a Task.
      *
-     * @param arguments args for Task. see storeTask for format
-     * @return Optional containing Task if valid, or null if invalid.
+     * @param arguments args for Task. {@link #storeTask(Task)} for format
+     * @return Optional containing Task if valid format, or empty if invalid.
      */
     private static Optional<Task> convertTaskRow(String[] arguments) {
         // verify completion (1) and description (2)
@@ -172,6 +186,7 @@ public class Storage {
     /**
      * Deletes task matching index.
      *
+     * @param index row index of Task in CSV to delete.
      * @throws UxieIOException I/O Exception during deleting of line
      */
     public void deleteTask(int index) throws UxieIOException {

@@ -16,11 +16,15 @@ public class DeleteCommand extends Command {
     /** Index of task to delete in list. */
     private final int taskIndex;
 
+    /**
+     * Generates DeleteCommand that deletes task matching taskIndex.
+     */
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     /**
+     * {@inheritDoc}
      * Deletes task matching index from TaskList.
      */
     @Override
@@ -35,7 +39,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns whether this command is exit. (false)
+     * {@inheritDoc}
+     * Returns false.
      */
     @Override
     public boolean isExit() {

@@ -18,15 +18,24 @@ public class EventCommand extends Command {
     /** Task to be added. */
     private Event task;
 
+    /**
+     * Generates an EventCommand with parameters for Event.
+     * @see uxie.tasks.Event#Event(String, LocalDateTime, LocalDateTime)
+     */
     public EventCommand(String desc, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         task = new Event(desc, startDateTime, endDateTime);
     }
 
+    /**
+     * Generates an EventCommand with parameters for Event.
+     * @see uxie.tasks.Event#Event(boolean, String, LocalDateTime, LocalDateTime)
+     */
     public EventCommand(boolean isCompleted, String desc, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         task = new Event(isCompleted, desc, startDateTime, endDateTime);
     }
 
     /**
+     * {@inheritDoc}
      * Adds the Event to the TaskList.
      */
     @Override
@@ -42,7 +51,8 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Returns whether this command is exit. (false)
+     * {@inheritDoc}
+     * Returns false.
      */
     @Override
     public boolean isExit() {

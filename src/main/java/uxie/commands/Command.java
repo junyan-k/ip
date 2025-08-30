@@ -11,10 +11,14 @@ import uxie.interfaces.Ui;
  */
 public abstract class Command {
 
-    /** Executes command. */
+    /** Executes command.
+     *
+     * @param tasks current TaskList used by Uxie.
+     * @param ui current Ui used by Uxie.
+     * @param storage current Storage used by Uxie.*/
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
-    /** Only returns true if command is exit, else return false. */
+    /** Returns true if command is exit, else return false. */
     public abstract boolean isExit();
 
 }

@@ -7,6 +7,10 @@ package uxie.exceptions;
  */
 public class UxieException extends Exception {
 
+    /**
+     * Generates UxieException with message.
+     * @see Exception#Exception(String)
+     */
     public UxieException(String message) {
         super(message);
     }

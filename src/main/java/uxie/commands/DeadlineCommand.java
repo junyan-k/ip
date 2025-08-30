@@ -15,17 +15,27 @@ import java.time.LocalDateTime;
  */
 public class DeadlineCommand extends Command {
 
+    /** Task to be added. */
     private Deadline task;
 
+    /**
+     * Generates a DeadlineCommand with parameters for Deadline.
+     * @see uxie.tasks.Deadline#Deadline(String, LocalDateTime)
+     */
     public DeadlineCommand(String desc, LocalDateTime deadline) {
         this.task = new Deadline(desc, deadline);
     }
 
+    /**
+     * Generates a DeadlineCommand with parameters for Deadline.
+     * @see uxie.tasks.Deadline#Deadline(boolean, String, LocalDateTime)
+     */
     public DeadlineCommand(boolean isCompleted, String desc, LocalDateTime deadline) {
         this.task = new Deadline(isCompleted, desc, deadline);
     }
 
     /**
+     * {@inheritDoc}
      * Adds the Deadline to the TaskList.
      */
     @Override
@@ -42,7 +52,8 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Returns whether this command is exit. (false)
+     * {@inheritDoc}
+     * Returns false.
      */
     @Override
     public boolean isExit() {

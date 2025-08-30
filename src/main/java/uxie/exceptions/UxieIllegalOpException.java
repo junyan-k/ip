@@ -9,6 +9,10 @@ package uxie.exceptions;
 
 public class UxieIllegalOpException extends UxieException {
 
+    /**
+     * Generates UxieIllegalOpException with provided message.
+     * @see uxie.exceptions.UxieException#UxieException(String)
+     */
     public UxieIllegalOpException(String message) {
         super(message);
     }

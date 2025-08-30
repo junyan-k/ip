@@ -2,35 +2,42 @@ package uxie.tasks;
 
 import uxie.interfaces.DateTimeParse;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Deadlines are Tasks that need to be done by a specific date/time.
- * (note: date/time is represented by String to allow for more
- *  flexible inputs)
  *
  * @author junyan-k
  */
 public class Deadline extends Task {
 
-    /** Deadline of task. */
+    /** Deadline of task. Stored as {@link LocalDateTime}. */
     private LocalDateTime deadline;
 
-
+    /**
+     * Generates a Deadline with provided description and deadline.
+     * Deadline is incomplete by default.
+     * @see Task#Task(String)
+     */
     public Deadline(String desc, LocalDateTime deadline) {
         super(desc);
         this.deadline = deadline;
     }
 
+    /**
+     * Generates a Deadline with provided description and deadline, with initial completion status.
+     * @see Task#Task(boolean, String)
+     */
     public Deadline(boolean isCompleted, String desc, LocalDateTime deadline) {
         super(isCompleted, desc);
         this.deadline = deadline;
     }
 
     /**
-     * Returns task type symbol. ("D")
+     * {@inheritDoc}
+     *
+     * @return "D"
      */
     @Override
     public String getSymbol() {
@@ -38,9 +45,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns time arguments in order as String.
+     * {@inheritDoc}
      *
-     * @return list containing deadline
+     * @return List containing ({@link #deadline})
      */
     @Override
     public List<LocalDateTime> getTimeArguments() {
