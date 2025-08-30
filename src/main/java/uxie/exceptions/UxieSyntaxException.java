@@ -6,7 +6,6 @@ package uxie.exceptions;
  *
  * @author junyan-k
  */
-
 public class UxieSyntaxException extends UxieException {
 
     public UxieSyntaxException(String message) {
