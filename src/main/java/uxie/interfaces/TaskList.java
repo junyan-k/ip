@@ -47,6 +47,22 @@ public class TaskList {
     }
 
     /**
+     * Find tasks from search String.
+     * Tasks are selected if their description contains exactly the search String.
+     *
+     * @return list of indices matching selected Tasks.
+     */
+    public List<Integer> findContainingString(String search) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDesc().contains(search)) { // contains exactly
+                result.add(i);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Return task matching index.
      *
      * @throws UxieIllegalOpException when taskIndex is out of bounds.
