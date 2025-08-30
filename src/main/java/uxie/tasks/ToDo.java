@@ -8,7 +8,6 @@ import java.util.List;
  *
  * @author junyan-k
  */
-
 public class ToDo extends Task {
 
     public ToDo(String desc) {
@@ -57,4 +56,5 @@ public class ToDo extends Task {
         }
         return false;
     }
+
 }

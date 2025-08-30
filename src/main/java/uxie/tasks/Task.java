@@ -18,7 +18,6 @@ public abstract class Task {
     /** Description of Task. */
     private String desc;
 
-
     public Task(String desc) {
         this.desc = desc;
         this.isCompleted = false;
@@ -85,4 +84,5 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", this.isCompleted ? "X" : " ", this.desc);
     }
+
 }

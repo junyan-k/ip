@@ -20,7 +20,6 @@ public class Event extends Task {
     /** Ending date/time */
     private LocalDateTime endDateTime;
 
-
     public Event(String desc, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(desc);
         this.startDateTime = startDateTime;
