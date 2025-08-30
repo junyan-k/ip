@@ -17,7 +17,9 @@ import uxie.interfaces.Ui;
 public class Uxie {
 
     private TaskList tasks;
+
     private Ui ui;
+
     private Storage storage;
 
     /**
@@ -61,4 +63,5 @@ public class Uxie {
     public static void main(String[] args) {
         new Uxie().run();
     }
+
 }
