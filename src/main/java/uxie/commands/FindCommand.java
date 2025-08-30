@@ -36,7 +36,7 @@ public class FindCommand extends Command {
             ui.uxiePrintln("Here are the matching tasks:");
             try {
                 for (int index: resultIndices) {
-                    ui.uxiePrintln(String.format("%s. %s", index, tasks.getTask(index)));
+                    ui.uxiePrintln(String.format("%s. %s", index + 1, tasks.getTask(index)));
                 }
             } catch (UxieIllegalOpException e) {
                 ui.printException(e); // this should never happen as indices are produced by TaskList
