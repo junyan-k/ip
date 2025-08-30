@@ -61,7 +61,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[%s]%s (by: %s)",
-                getSymbol(), super.toString(), DateTimeParse.outputParse(deadline));
+                getSymbol(), super.toString(), DateTimeParse.parseOutput(deadline));
     }
 
     /**

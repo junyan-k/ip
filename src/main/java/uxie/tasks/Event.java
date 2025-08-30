@@ -66,8 +66,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[%s]%s (from: %s to: %s)",
-                getSymbol(), super.toString(), DateTimeParse.outputParse(startDateTime),
-                DateTimeParse.outputParse(endDateTime));
+                getSymbol(), super.toString(), DateTimeParse.parseOutput(startDateTime),
+                DateTimeParse.parseOutput(endDateTime));
     }
 
     /**

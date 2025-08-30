@@ -28,7 +28,7 @@ public class DateTimeParse {
      *
      * @throws UxieSyntaxException incorrect format of input string
      */
-    public static LocalDateTime inputParse(String dateTimeString) throws UxieSyntaxException {
+    public static LocalDateTime parseInput(String dateTimeString) throws UxieSyntaxException {
         try {
             return LocalDateTime.parse(dateTimeString, INPUT_DATETIME_FORMAT);
         } catch (DateTimeParseException e) {
@@ -41,7 +41,7 @@ public class DateTimeParse {
      * Returns LocalDateTime object as String in output format.
      * Uses {@link #OUTPUT_DATETIME_FORMAT}
      */
-    public static String outputParse(LocalDateTime dateTime) {
+    public static String parseOutput(LocalDateTime dateTime) {
         return OUTPUT_DATETIME_FORMAT.format(dateTime);
     }
 
@@ -52,7 +52,7 @@ public class DateTimeParse {
      * @return LocalDateTime produced from parsing stored data
      * @throws UxieSyntaxException incorrect format of input string
      */
-    public static LocalDateTime storageReadParse(String dateTimeString) throws UxieSyntaxException {
+    public static LocalDateTime parseStorageRead(String dateTimeString) throws UxieSyntaxException {
         try {
             return LocalDateTime.parse(dateTimeString, STORAGE_DATETIME_FORMAT);
         } catch (DateTimeParseException e) {
@@ -65,7 +65,7 @@ public class DateTimeParse {
      * Returns DateTime object as String in output format for local storage.
      * Uses {@link #STORAGE_DATETIME_FORMAT}
      */
-    public static String storageWriteParse(LocalDateTime dateTime) {
+    public static String parseStorageWrite(LocalDateTime dateTime) {
         return STORAGE_DATETIME_FORMAT.format(dateTime);
     }
 

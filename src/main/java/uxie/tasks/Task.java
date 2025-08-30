@@ -93,4 +93,5 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", this.isCompleted ? "X" : " ", this.desc);
     }
+
 }

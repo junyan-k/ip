@@ -49,9 +49,9 @@ public class TaskList {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new UxieIllegalOpException("That task doesn't exist.");
         }
-        Task t = tasks.get(taskIndex);
+        Task removedTask = tasks.get(taskIndex);
         tasks.remove(taskIndex);
-        return t.getDesc();
+        return removedTask.getDesc();
     }
 
     /**
@@ -71,7 +71,7 @@ public class TaskList {
     /**
      * Returns size of list (no. of tasks).
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 

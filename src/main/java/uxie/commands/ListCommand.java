@@ -29,7 +29,7 @@ public class ListCommand extends Command {
             ui.uxiePrintln("You don't have any tasks yet.");
         }
         try {
-            for (int i = 1; i <= tasks.size(); i++) {
+            for (int i = 1; i <= tasks.getSize(); i++) {
                 ui.uxiePrintln(String.format("%s. %s", i, tasks.getTask(i - 1)));
             }
         } catch (UxieIllegalOpException e) {

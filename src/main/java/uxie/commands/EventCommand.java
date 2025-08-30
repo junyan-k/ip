@@ -30,7 +30,8 @@ public class EventCommand extends Command {
      * Generates an EventCommand with parameters for Event.
      * @see uxie.tasks.Event#Event(boolean, String, LocalDateTime, LocalDateTime)
      */
-    public EventCommand(boolean isCompleted, String desc, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public EventCommand(boolean isCompleted, String desc,
+            LocalDateTime startDateTime, LocalDateTime endDateTime) {
         task = new Event(isCompleted, desc, startDateTime, endDateTime);
     }
 
@@ -47,7 +48,7 @@ public class EventCommand extends Command {
             ui.printException(e);
         }
         ui.uxiePrintln(String.format("Alright. Task added:\n  %s\nYou have %s total tasks. Have fun.",
-                task, tasks.size()));
+                task, tasks.getSize()));
     }
 
     /**
@@ -58,4 +59,5 @@ public class EventCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 }

@@ -6,7 +6,6 @@ package uxie.exceptions;
  *
  * @author junyan-k
  */
-
 public class UxieIllegalOpException extends UxieException {
 
     /**
@@ -25,4 +24,5 @@ public class UxieIllegalOpException extends UxieException {
     public String toString() {
         return String.format("Can't do that, trainer. %s", this.getMessage());
     }
+
 }

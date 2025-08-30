@@ -24,4 +24,5 @@ public class UxieIOException extends UxieException {
     public String toString() {
         return String.format("This prison angers me, trainer. %s", this.getMessage());
     }
+
 }
