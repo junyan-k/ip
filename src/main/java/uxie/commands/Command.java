@@ -11,7 +11,8 @@ import uxie.interfaces.Ui;
  */
 public abstract class Command {
 
-    /** Executes command.
+    /**
+     * Executes command.
      *
      * @param tasks current TaskList used by Uxie.
      * @param ui current Ui used by Uxie.
