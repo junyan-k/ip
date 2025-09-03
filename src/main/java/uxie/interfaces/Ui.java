@@ -1,8 +1,8 @@
 package uxie.interfaces;
 
-import uxie.exceptions.UxieException;
-
 import java.util.Scanner;
+
+import uxie.exceptions.UxieException;
 
 /**
  * Represents UI of Uxie.
@@ -12,11 +12,11 @@ import java.util.Scanner;
 public class Ui {
 
     /** Used to space messages (60 characters). */
-    private final static String LINE_BREAK =
+    private static final String LINE_BREAK =
             "____________________________________________________________";
 
     /** Number of whitespace characters to indent Uxie's messages with. */
-    private final static int INDENTATION = 4;
+    private static final int INDENTATION = 4;
 
     /** Scanner to obtain user input. */
     private final Scanner input;
@@ -49,9 +49,9 @@ public class Ui {
      */
     public void printWelcome() {
         printLineBreak();
-        uxiePrintln("Oh. Hello there, Trainer.\n" +
-                "Uxie uxie, or whatever.\n" +
-                "Dare I ask why you have summoned me?");
+        uxiePrintln("Oh. Hello there, Trainer.\n"
+                + "Uxie uxie, or whatever.\n"
+                + "Dare I ask why you have summoned me?");
         printLineBreak();
     }
 

@@ -1,10 +1,10 @@
 package uxie.interfaces;
 
-import uxie.exceptions.UxieIllegalOpException;
-import uxie.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import uxie.exceptions.UxieIllegalOpException;
+import uxie.tasks.Task;
 
 /**
  * Represents a list of Tasks.

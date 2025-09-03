@@ -1,5 +1,9 @@
 package uxie.interfaces;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import uxie.commands.Command;
 import uxie.commands.DeadlineCommand;
 import uxie.commands.DeleteCommand;
@@ -12,10 +16,6 @@ import uxie.commands.TodoCommand;
 import uxie.commands.UnmarkCommand;
 import uxie.exceptions.UxieSyntaxException;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Parses commands from Ui.
  *
@@ -25,11 +25,11 @@ public class CommandParse {
 
     /**
      * Parses input String and returns corresponding Command.
-     * @see uxie.commands
      *
      * @param userCommand input String from user
      * @return resulting Command object of specific type
      * @throws UxieSyntaxException when userCommand is in incorrect format (e.g. missing arguments, unknown command)
+     * @see uxie.commands
      */
     public static Command parse(String userCommand) throws UxieSyntaxException {
         List<String> splitCommand = new ArrayList<>(List.of(userCommand.split(" ")));

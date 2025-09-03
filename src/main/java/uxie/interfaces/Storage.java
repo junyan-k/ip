@@ -1,12 +1,5 @@
 package uxie.interfaces;
 
-import uxie.exceptions.UxieIOException;
-import uxie.exceptions.UxieSyntaxException;
-import uxie.tasks.Deadline;
-import uxie.tasks.Event;
-import uxie.tasks.Task;
-import uxie.tasks.ToDo;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -16,9 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.opencsv.exceptions.CsvException;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvException;
+
+import uxie.exceptions.UxieIOException;
+import uxie.exceptions.UxieSyntaxException;
+import uxie.tasks.Deadline;
+import uxie.tasks.Event;
+import uxie.tasks.Task;
+import uxie.tasks.ToDo;
 
 /**
  * Stores and reads Uxie's data with local file.
@@ -66,7 +66,7 @@ public class Storage {
 
     /**
      * Stores Task into CSV file.
-     * Format is: "<type>,<completion>,<description>,(time1),(time2)"
+     * Format is: "[type],[completion],[description],(time1),(time2)"
      * <p>
      * type: T if Todos, D if Deadline, E if Event
      * completion: 1 if completed, 0 otherwise
@@ -129,33 +129,33 @@ public class Storage {
         }
         try {
             switch (arguments[0]) {
-                case "T":
-                    if (arguments.length == 3) { // valid
-                        return Optional.of(new ToDo(arguments[1].equals("1"), arguments[2]));
-                    }
-                    break;
+            case "T":
+                if (arguments.length == 3) { // valid
+                    return Optional.of(new ToDo(arguments[1].equals("1"), arguments[2]));
+                }
+                break;
 
-                case "D":
-                    if (arguments.length == 4 && !arguments[3].isBlank()) { // valid
-                        return Optional.of(new Deadline(arguments[1].equals("1"), arguments[2],
-                                DateTimeParse.parseStorageRead(arguments[3])));
-                    }
-                    break;
+            case "D":
+                if (arguments.length == 4 && !arguments[3].isBlank()) { // valid
+                    return Optional.of(new Deadline(arguments[1].equals("1"), arguments[2],
+                            DateTimeParse.parseStorageRead(arguments[3])));
+                }
+                break;
 
-                case "E":
-                    if (arguments.length == 5 && !arguments[3].isBlank()
-                            && !arguments[4].isBlank()) { // valid
-                        return Optional.of(
-                                new Event(arguments[1].equals("1"), arguments[2],
-                                        DateTimeParse.parseStorageRead(arguments[3]),
-                                        DateTimeParse.parseStorageRead(arguments[4]))
-                        );
-                    }
-                    break;
+            case "E":
+                if (arguments.length == 5 && !arguments[3].isBlank()
+                        && !arguments[4].isBlank()) { // valid
+                    return Optional.of(
+                            new Event(arguments[1].equals("1"), arguments[2],
+                                    DateTimeParse.parseStorageRead(arguments[3]),
+                                    DateTimeParse.parseStorageRead(arguments[4]))
+                    );
+                }
+                break;
 
-                default:
-                    // task symbol not recognized
-                    return Optional.empty();
+            default:
+                // task symbol not recognized
+                return Optional.empty();
             }
         } catch (UxieSyntaxException e) {
             return Optional.empty();
