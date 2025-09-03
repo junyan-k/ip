@@ -1,10 +1,10 @@
 package uxie.interfaces;
 
-import uxie.exceptions.UxieSyntaxException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import uxie.exceptions.UxieSyntaxException;
 
 /**
  * Parses Strings to DateTime.
@@ -14,13 +14,13 @@ import java.time.format.DateTimeParseException;
 public class DateTimeParse {
 
     /** DateTimeFormatter used to format user-inputted date/times. */
-    private final static DateTimeFormatter INPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    private static final DateTimeFormatter INPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
     /** DateTimeFormatter used to format date/times printed by UI. */
-    private final static DateTimeFormatter OUTPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm");
+    private static final DateTimeFormatter OUTPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm");
 
     /** DateTimeFormatter used to format date/times in stored locally. */
-    private final static DateTimeFormatter STORAGE_DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    private static final DateTimeFormatter STORAGE_DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
     /**
      * Parses input String to LocalDateTime object.
