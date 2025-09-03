@@ -18,7 +18,7 @@ public class UxieSyntaxException extends UxieException {
 
     /**
      * Returns exception as String.
-     * Format: "Didn't quite catch that, trainer. <message>"
+     * Format: "Didn't quite catch that, trainer. [message]"
      */
     @Override
     public String toString() {

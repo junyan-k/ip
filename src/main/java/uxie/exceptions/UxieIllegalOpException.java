@@ -18,7 +18,7 @@ public class UxieIllegalOpException extends UxieException {
 
     /**
      * Returns exception as String.
-     * Format: "Can't do that, trainer. <message>"
+     * Format: "Can't do that, trainer. [message]"
      */
     @Override
     public String toString() {

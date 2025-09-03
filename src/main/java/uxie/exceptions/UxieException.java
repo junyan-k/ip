@@ -17,7 +17,7 @@ public class UxieException extends Exception {
 
     /**
      * Returns UxieException as String.
-     * Format: "Uxie: <message>"
+     * Format: "Uxie: [message]"
      */
     @Override
     public String toString() {

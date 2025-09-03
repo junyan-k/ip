@@ -1,3 +1,4 @@
+// CHECKSTYLE.OFF: AbbreviationAsWordInName
 package uxie.exceptions;
 
 /**
@@ -18,7 +19,7 @@ public class UxieIOException extends UxieException {
 
     /**
      * Returns exception as String.
-     * Format: "This prison angers me, trainer. <msg>"
+     * Format: "This prison angers me, trainer. [msg]"
      */
     @Override
     public String toString() {
@@ -26,3 +27,4 @@ public class UxieIOException extends UxieException {
     }
 
 }
+// CHECKSTYLE.ON: AbbreviationAsWordInName
