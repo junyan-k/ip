@@ -48,7 +48,8 @@ test {
 }
 
 application {
-    mainClass.set("uxie.Uxie")
+    // mainClass.set("uxie.Uxie") // No GUI
+    mainClass.set("uxie.interfaces.ui.GuiLauncher") // GUI
 }
 
 shadowJar {
