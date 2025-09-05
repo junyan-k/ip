@@ -47,7 +47,7 @@ public class EventCommand extends Command {
         } catch (UxieIOException e) {
             ui.printException(e);
         }
-        ui.uxiePrintln(String.format("Alright. Task added:\n  %s\nYou have %s total tasks. Have fun.",
+        ui.uxieAppendln(String.format("Alright. Task added:\n  %s\nYou have %s total tasks. Have fun.",
                 task, tasks.getSize()));
     }
 

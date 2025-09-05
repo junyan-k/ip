@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
         try {
             String desc = tasks.deleteTask(taskIndex);
             storage.deleteTask(taskIndex);
-            ui.uxiePrintln(String.format("Good to be realistic. Task %s (%s) has been deleted.",
+            ui.uxieAppendln(String.format("Good to be realistic. Task %s (%s) has been deleted.",
                     taskIndex + 1, desc));
         } catch (UxieIllegalOpException | UxieIOException e) {
             ui.printException(e);

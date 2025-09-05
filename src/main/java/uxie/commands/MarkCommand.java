@@ -32,7 +32,7 @@ public class MarkCommand extends Command {
         try {
             String desc = tasks.markCompleted(taskIndex);
             storage.toggleTaskCompletion(taskIndex);
-            ui.uxiePrintln(String.format("Task %s (%s) is done. Congratulations.", taskIndex + 1, desc));
+            ui.uxieAppendln(String.format("Task %s (%s) is done. Congratulations.", taskIndex + 1, desc));
         } catch (UxieIllegalOpException | UxieIOException e) {
             ui.printException(e);
         }

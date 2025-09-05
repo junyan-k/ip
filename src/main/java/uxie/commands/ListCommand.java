@@ -26,11 +26,11 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getSize() == 0) {
-            ui.uxiePrintln("You don't have any tasks yet.");
+            ui.uxieAppendln("You don't have any tasks yet.");
         }
         try {
             for (int i = 1; i <= tasks.getSize(); i++) {
-                ui.uxiePrintln(String.format("%s. %s", i, tasks.getTask(i - 1)));
+                ui.uxieAppendln(String.format("%s. %s", i, tasks.getTask(i - 1)));
             }
         } catch (UxieIllegalOpException e) {
             ui.printException(e); // should never happen as indices are controlled
