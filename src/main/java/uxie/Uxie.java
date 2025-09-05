@@ -63,19 +63,20 @@ public class Uxie {
      * Includes body of program loop.
      */
     public void run() {
-        ui.printWelcome();
+        ui.printWelcome(); // print directly
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.printLineBreak();
+                ui.printLineBreak(); // print directly
                 Command c = CommandParse.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, ui, storage); // loads ui string buffer
+                System.out.print(ui.getBufferString()); // gets and clears ui string buffer
                 isExit = c.isExit();
             } catch (UxieException e) {
-                ui.printException(e);
+                ui.printException(e); // print directly
             } finally {
-                ui.printLineBreak();
+                ui.printLineBreak(); // print directly
             }
         }
     }
