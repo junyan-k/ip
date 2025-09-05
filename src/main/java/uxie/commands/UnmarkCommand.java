@@ -34,7 +34,7 @@ public class UnmarkCommand extends Command {
             storage.toggleTaskCompletion(taskIndex);
             ui.uxieAppendln(String.format("Forgot something? Task %s (%s) is now incomplete.", taskIndex + 1, desc));
         } catch (UxieIllegalOpException | UxieIOException e) {
-            ui.printException(e);
+            ui.appendException(e);
         }
     }
 

@@ -39,7 +39,7 @@ public class FindCommand extends Command {
                     ui.uxieAppendln(String.format("%s. %s", index + 1, tasks.getTask(index)));
                 }
             } catch (UxieIllegalOpException e) {
-                ui.printException(e); // this should never happen as indices are produced by TaskList
+                ui.appendException(e); // this should never happen as indices are produced by TaskList
             }
         }
     }

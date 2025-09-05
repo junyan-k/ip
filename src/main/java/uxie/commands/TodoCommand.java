@@ -42,7 +42,7 @@ public class TodoCommand extends Command {
         try {
             storage.storeTask(task);
         } catch (UxieIOException e) {
-            ui.printException(e);
+            ui.appendException(e);
         }
         ui.uxieAppendln(String.format("Alright. Task added:\n  %s\n"
                 + "You have %s total tasks. Best of luck.", task, tasks.getSize()));

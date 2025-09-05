@@ -33,7 +33,7 @@ public class ListCommand extends Command {
                 ui.uxieAppendln(String.format("%s. %s", i, tasks.getTask(i - 1)));
             }
         } catch (UxieIllegalOpException e) {
-            ui.printException(e); // should never happen as indices are controlled
+            ui.appendException(e); // should never happen as indices are controlled
         }
     }
 

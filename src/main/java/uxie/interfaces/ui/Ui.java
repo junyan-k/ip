@@ -18,6 +18,14 @@ public class Ui {
     /** Number of whitespace characters to indent Uxie's messages with. */
     private static final int INDENTATION = 4;
 
+    /** Welcome message. */
+    private static final String WELCOME = "Oh. Hello there, Trainer.\n"
+            + "Uxie uxie, or whatever.\n"
+            + "Dare I ask why you have summoned me?";
+
+    /** Goodbye message. */
+    private static final String GOODBYE = "That is all? Very well. Goodbye.";
+
     /** Scanner to obtain user input. */
     private final Scanner input;
 
@@ -53,9 +61,7 @@ public class Ui {
      */
     public void printWelcome() {
         printLineBreak();
-        uxiePrintln("Oh. Hello there, Trainer.\n"
-                + "Uxie uxie, or whatever.\n"
-                + "Dare I ask why you have summoned me?");
+        uxiePrintln(WELCOME);
         printLineBreak();
     }
 
@@ -63,7 +69,7 @@ public class Ui {
      * Prints goodbye message.
      */
     public void printGoodbye() {
-        uxiePrintln("That is all? Very well. Goodbye.");
+        uxiePrintln(GOODBYE);
     }
 
     /**
@@ -93,6 +99,27 @@ public class Ui {
      */
     public void uxieAppendln(String str) {
         stringBuffer.append(str.indent(INDENTATION));
+    }
+
+    /**
+     * Appends welcome message to Ui's buffer.
+     */
+    public void appendWelcome() {
+        uxieAppendln(WELCOME);
+    }
+
+    /**
+     * Appends goodbye message to Ui's buffer.
+     */
+    public void appendGoodbye() {
+        uxieAppendln(GOODBYE);
+    }
+
+    /**
+     * Appends exception message to Ui's buffer.
+     */
+    public void appendException(UxieException e) {
+        uxieAppendln(e.toString());
     }
 
     /**
