@@ -11,20 +11,20 @@ import uxie.exceptions.UxieException;
  */
 public class Ui {
 
+    /** Welcome message. */
+    public static final String WELCOME = "Oh. Hello there, Trainer.\n"
+            + "Uxie uxie, or whatever.\n"
+            + "Dare I ask why you have summoned me?";
+
+    /** Goodbye message. */
+    public static final String GOODBYE = "That is all? Very well. Goodbye.";
+
     /** Used to space messages (60 characters). */
     private static final String LINE_BREAK =
             "____________________________________________________________";
 
     /** Number of whitespace characters to indent Uxie's text UI messages with. */
     private static final int INDENTATION = 4;
-
-    /** Welcome message. */
-    private static final String WELCOME = "Oh. Hello there, Trainer.\n"
-            + "Uxie uxie, or whatever.\n"
-            + "Dare I ask why you have summoned me?";
-
-    /** Goodbye message. */
-    private static final String GOODBYE = "That is all? Very well. Goodbye.";
 
     /** Scanner to obtain user input. */
     private final Scanner input;

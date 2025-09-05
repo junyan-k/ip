@@ -92,7 +92,6 @@ public class Uxie {
         try {
             Command c = CommandParse.parse(input);
             c.execute(tasks, ui, storage);
-            // TODO: Resolve exit command by passing special string as response, then handle in FX Controller
             return ui.getBufferString();
         } catch (UxieException e) {
             ui.appendException(e);

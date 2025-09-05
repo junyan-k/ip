@@ -1,5 +1,6 @@
 package uxie.interfaces.ui.fxelements;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import uxie.Uxie;
+import uxie.interfaces.ui.Ui;
 
 /**
  * Controller for the main GUI.
@@ -27,9 +29,16 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/mel1.jpg"));
     private Image uxieImage = new Image(this.getClass().getResourceAsStream("/images/uxie1.jpg"));
 
+    /**
+     * Initializes MainWindow.
+     * Shows welcome DialogBox from Uxie.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getUxieDialog(Ui.WELCOME, uxieImage)
+        );
     }
 
     /** Injects the Uxie instance */
@@ -45,6 +54,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = uxie.getResponse(input);
+        if (response.equals(Ui.GOODBYE)) {
+            Platform.exit();
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getUxieDialog(response, uxieImage)

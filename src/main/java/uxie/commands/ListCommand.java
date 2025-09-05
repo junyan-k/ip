@@ -30,7 +30,7 @@ public class ListCommand extends Command {
         }
         try {
             for (int i = 1; i <= tasks.getSize(); i++) {
-                ui.uxieAppendln(String.format("%s. %s", i, tasks.getTask(i - 1)));
+                ui.uxieAppendln(String.format("%s. %s\n", i, tasks.getTask(i - 1)));
             }
         } catch (UxieIllegalOpException e) {
             ui.appendException(e); // should never happen as indices are controlled
