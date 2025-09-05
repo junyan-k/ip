@@ -21,15 +21,19 @@ public class Ui {
     /** Scanner to obtain user input. */
     private final Scanner input;
 
+    /** Stored buffer of Strings. */
+    private StringBuilder stringBuffer;
+
     /**
      * Generates a Ui. Initializes input Scanner with {@link java.lang.System#in}.
      */
     public Ui() {
         input = new Scanner(System.in);
+        stringBuffer = new StringBuilder();
     }
 
     /**
-     * Prints string with Uxie's indentation, and a new line.
+     * Immediately prints string with Uxie's indentation, and a new line.
      * @see #INDENTATION
      */
     public void uxiePrintln(String str) {
@@ -82,6 +86,24 @@ public class Ui {
      */
     public void closeScanner() {
         input.close();
+    }
+
+    /**
+     * Appends given String to Ui's buffer.
+     */
+    public void uxieAppendln(String str) {
+        stringBuffer.append(str.indent(INDENTATION));
+    }
+
+    /**
+     * Returns and clears String buffer.
+     *
+     * @return String stored in Ui's buffer.
+     */
+    public String getBufferString() {
+        String outputString = stringBuffer.toString();
+        stringBuffer.setLength(0); // clears stringBuffer for reuse
+        return outputString;
     }
 
 }
