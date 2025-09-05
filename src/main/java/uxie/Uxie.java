@@ -80,6 +80,18 @@ public class Uxie {
         }
     }
 
+    /**
+     * Gets output String resulting from evaluating command in input.
+     *
+     * @param input String inputted by user.
+     * @return response for Uxie to print.
+     */
+    public String getResponse(String input) {
+        // TODO: Make Command#execute pass strings to the ui to build up in a stringbuilder,
+        //  then call a function to empty the SB into GUI
+        return "blank";
+    }
+
     public static void main(String[] args) {
         new Uxie().run();
     }
