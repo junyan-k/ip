@@ -1,4 +1,4 @@
-package uxie.interfaces;
+package uxie.interfaces.ui;
 
 import java.util.Scanner;
 

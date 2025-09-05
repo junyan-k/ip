@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import uxie.exceptions.UxieIOException;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 import uxie.tasks.Event;
 
 /**

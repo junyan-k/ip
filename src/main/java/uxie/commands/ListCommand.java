@@ -3,7 +3,7 @@ package uxie.commands;
 import uxie.exceptions.UxieIllegalOpException;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 
 /**
  * Command that lists all Tasks.
