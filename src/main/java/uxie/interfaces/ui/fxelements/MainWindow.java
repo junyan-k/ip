@@ -19,6 +19,7 @@ import uxie.interfaces.ui.Ui;
  * Controller for the main GUI.
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -30,8 +31,10 @@ public class MainWindow extends AnchorPane {
 
     private Uxie uxie;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/mel1.jpg"));
-    private Image uxieImage = new Image(this.getClass().getResourceAsStream("/images/uxie1.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream(
+            "/images/mel1.jpg"));
+    private Image uxieImage = new Image(this.getClass().getResourceAsStream(
+            "/images/uxie1.jpg"));
 
     /**
      * Initializes MainWindow.
@@ -54,8 +57,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Uxie's response, then appends them to
+     * the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {

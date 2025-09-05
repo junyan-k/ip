@@ -96,6 +96,7 @@ public class Ui {
 
     /**
      * Appends given String to Ui's buffer.
+     * Does not add indentation.
      */
     public void uxieAppendln(String str) {
         stringBuffer.append(str); // no indentation!
