@@ -1,5 +1,7 @@
 package uxie.interfaces.ui.fxelements;
 
+import java.util.Optional;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,7 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import uxie.Uxie;
+import uxie.interfaces.ui.GuiMain;
 import uxie.interfaces.ui.Ui;
 
 /**
@@ -39,6 +43,9 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getUxieDialog(Ui.WELCOME, uxieImage)
         );
+
+        Optional<Font> textFieldFont = GuiMain.getFont();
+        textFieldFont.ifPresent(font -> userInput.setFont(font));
     }
 
     /** Injects the Uxie instance */
