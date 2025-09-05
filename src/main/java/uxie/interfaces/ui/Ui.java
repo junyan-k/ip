@@ -15,7 +15,7 @@ public class Ui {
     private static final String LINE_BREAK =
             "____________________________________________________________";
 
-    /** Number of whitespace characters to indent Uxie's messages with. */
+    /** Number of whitespace characters to indent Uxie's text UI messages with. */
     private static final int INDENTATION = 4;
 
     /** Welcome message. */
@@ -98,7 +98,7 @@ public class Ui {
      * Appends given String to Ui's buffer.
      */
     public void uxieAppendln(String str) {
-        stringBuffer.append(str.indent(INDENTATION));
+        stringBuffer.append(str); // no indentation!
     }
 
     /**
