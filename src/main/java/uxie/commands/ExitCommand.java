@@ -2,7 +2,7 @@ package uxie.commands;
 
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 
 /**
  * Command that exits Uxie program.
@@ -24,7 +24,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printGoodbye();
+        ui.appendGoodbye();
         ui.closeScanner();
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 import uxie.exceptions.UxieIllegalOpException;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 
 /**
  * Command that finds Tasks matching String.
@@ -31,15 +31,15 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Integer> resultIndices = tasks.findContainingString(search);
         if (resultIndices.isEmpty()) {
-            ui.uxiePrintln("I can't find any tasks mentioning that.");
+            ui.uxieAppendln("I can't find any tasks mentioning that.");
         } else {
-            ui.uxiePrintln("Here are the matching tasks:");
+            ui.uxieAppendln("Here are the matching tasks:");
             try {
                 for (int index: resultIndices) {
-                    ui.uxiePrintln(String.format("%s. %s", index + 1, tasks.getTask(index)));
+                    ui.uxieAppendln(String.format("%s. %s", index + 1, tasks.getTask(index)));
                 }
             } catch (UxieIllegalOpException e) {
-                ui.printException(e); // this should never happen as indices are produced by TaskList
+                ui.appendException(e); // this should never happen as indices are produced by TaskList
             }
         }
     }

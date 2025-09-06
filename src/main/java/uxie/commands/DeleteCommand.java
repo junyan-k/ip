@@ -4,7 +4,7 @@ import uxie.exceptions.UxieIOException;
 import uxie.exceptions.UxieIllegalOpException;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 
 /**
  * Command for deleting a task.
@@ -32,10 +32,10 @@ public class DeleteCommand extends Command {
         try {
             String desc = tasks.deleteTask(taskIndex);
             storage.deleteTask(taskIndex);
-            ui.uxiePrintln(String.format("Good to be realistic. Task %s (%s) has been deleted.",
+            ui.uxieAppendln(String.format("Good to be realistic. Task %s (%s) has been deleted.",
                     taskIndex + 1, desc));
         } catch (UxieIllegalOpException | UxieIOException e) {
-            ui.printException(e);
+            ui.appendException(e);
         }
     }
 

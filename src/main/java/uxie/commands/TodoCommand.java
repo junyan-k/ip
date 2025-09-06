@@ -3,7 +3,7 @@ package uxie.commands;
 import uxie.exceptions.UxieIOException;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 import uxie.tasks.ToDo;
 
 /**
@@ -42,9 +42,9 @@ public class TodoCommand extends Command {
         try {
             storage.storeTask(task);
         } catch (UxieIOException e) {
-            ui.printException(e);
+            ui.appendException(e);
         }
-        ui.uxiePrintln(String.format("Alright. Task added:\n  %s\n"
+        ui.uxieAppendln(String.format("Alright. Task added:\n  %s\n"
                 + "You have %s total tasks. Best of luck.", task, tasks.getSize()));
     }
 

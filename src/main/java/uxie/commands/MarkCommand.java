@@ -4,7 +4,7 @@ import uxie.exceptions.UxieIOException;
 import uxie.exceptions.UxieIllegalOpException;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 
 /**
  * Command that marks a task as complete.
@@ -32,9 +32,9 @@ public class MarkCommand extends Command {
         try {
             String desc = tasks.markCompleted(taskIndex);
             storage.toggleTaskCompletion(taskIndex);
-            ui.uxiePrintln(String.format("Task %s (%s) is done. Congratulations.", taskIndex + 1, desc));
+            ui.uxieAppendln(String.format("Task %s (%s) is done. Congratulations.", taskIndex + 1, desc));
         } catch (UxieIllegalOpException | UxieIOException e) {
-            ui.printException(e);
+            ui.appendException(e);
         }
     }
 

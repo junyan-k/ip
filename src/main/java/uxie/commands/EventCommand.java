@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import uxie.exceptions.UxieIOException;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 import uxie.tasks.Event;
 
 /**
@@ -45,9 +45,9 @@ public class EventCommand extends Command {
         try {
             storage.storeTask(task);
         } catch (UxieIOException e) {
-            ui.printException(e);
+            ui.appendException(e);
         }
-        ui.uxiePrintln(String.format("Alright. Task added:\n  %s\nYou have %s total tasks. Have fun.",
+        ui.uxieAppendln(String.format("Alright. Task added:\n  %s\nYou have %s total tasks. Have fun.",
                 task, tasks.getSize()));
     }
 

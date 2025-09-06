@@ -4,7 +4,7 @@ import uxie.exceptions.UxieIOException;
 import uxie.exceptions.UxieIllegalOpException;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 
 /**
  * Command that marks a task as incomplete.
@@ -32,9 +32,9 @@ public class UnmarkCommand extends Command {
         try {
             String desc = tasks.markIncomplete(taskIndex);
             storage.toggleTaskCompletion(taskIndex);
-            ui.uxiePrintln(String.format("Forgot something? Task %s (%s) is now incomplete.", taskIndex + 1, desc));
+            ui.uxieAppendln(String.format("Forgot something? Task %s (%s) is now incomplete.", taskIndex + 1, desc));
         } catch (UxieIllegalOpException | UxieIOException e) {
-            ui.printException(e);
+            ui.appendException(e);
         }
     }
 

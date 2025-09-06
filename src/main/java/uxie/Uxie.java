@@ -6,7 +6,7 @@ import uxie.exceptions.UxieIOException;
 import uxie.interfaces.CommandParse;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 
 /**
  * Main class of Chatbot Uxie.
@@ -63,20 +63,39 @@ public class Uxie {
      * Includes body of program loop.
      */
     public void run() {
-        ui.printWelcome();
+        ui.printWelcome(); // print directly
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.printLineBreak();
+                ui.printLineBreak(); // print directly
                 Command c = CommandParse.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, ui, storage); // loads ui string buffer
+                System.out.print(ui.getBufferString()); // gets and clears ui string buffer
                 isExit = c.isExit();
             } catch (UxieException e) {
-                ui.printException(e);
+                ui.printException(e); // print directly
             } finally {
-                ui.printLineBreak();
+                ui.printLineBreak(); // print directly
             }
+        }
+    }
+
+    /**
+     * Gets output String resulting from evaluating command in input.
+     * Used by JavaFX GUI.
+     *
+     * @param input String inputted by user.
+     * @return response for Uxie to print.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = CommandParse.parse(input);
+            c.execute(tasks, ui, storage);
+            return ui.getBufferString();
+        } catch (UxieException e) {
+            ui.appendException(e);
+            return ui.getBufferString();
         }
     }
 

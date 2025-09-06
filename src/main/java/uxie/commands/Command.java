@@ -2,7 +2,7 @@ package uxie.commands;
 
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
-import uxie.interfaces.Ui;
+import uxie.interfaces.ui.Ui;
 
 /**
  * Abstract class representing commands for Uxie to execute.
