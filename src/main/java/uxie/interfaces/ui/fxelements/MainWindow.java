@@ -48,7 +48,10 @@ public class MainWindow extends AnchorPane {
         );
 
         Optional<Font> textFieldFont = GuiMain.getFont();
-        textFieldFont.ifPresent(font -> userInput.setFont(font));
+        textFieldFont.ifPresent(font -> {
+            userInput.setFont(font);
+            sendButton.setFont(font);
+        });
     }
 
     /** Injects the Uxie instance */
