@@ -42,103 +42,25 @@ public class CommandParse {
             return new ListCommand();
 
         case "mark": // mark task <n> as completed
-            try {
-                return new MarkCommand(Integer.parseInt(splitCommand.get(1)) - 1);
-            } catch (NumberFormatException e) {
-                throw new UxieSyntaxException("That index doesn't seem right.");
-            }
+            return parseMarkCommand(splitCommand);
 
         case "unmark": // mark task <n> as incomplete
-            try {
-                return new UnmarkCommand(Integer.parseInt(splitCommand.get(1)) - 1);
-            } catch (NumberFormatException e) {
-                throw new UxieSyntaxException("That index doesn't seem right.");
-            }
+            return parseUnmarkCommand(splitCommand);
 
         case "delete": // delete task from tasks
-            try {
-                return new DeleteCommand(Integer.parseInt(splitCommand.get(1)) - 1);
-            } catch (NumberFormatException e) {
-                throw new UxieSyntaxException("That index doesn't seem right.");
-            }
+            return parseDeleteCommand(splitCommand);
 
-        case "find":
-            splitCommand.remove(0);
-            String searchString = String.join(" ", splitCommand);
-            if (searchString.isBlank()) {
-                // search is empty
-                throw new UxieSyntaxException("Your search string can't be empty.");
-            }
-            return new FindCommand(searchString);
+        case "find": // find tasks containing string
+            return parseFindCommand(splitCommand);
 
         case "todo": // add task as a todos
-            splitCommand.remove(0); // remove command word
-            String todoDesc = String.join(" ", splitCommand);
-            if (todoDesc.isBlank()) {
-                // desc is empty
-                throw new UxieSyntaxException("Your task description can't be empty.");
-            }
-            return new TodoCommand(todoDesc);
+            return parseTodoCommand(splitCommand);
 
         case "deadline": // add task as a deadline
-            splitCommand.remove(0); // remove command word
-            if (splitCommand.isEmpty() || splitCommand.get(0).matches("\s*|/.*")) {
-                // desc is empty
-                throw new UxieSyntaxException("Your task description can't be empty.");
-            }
-            int byIndex = -1;
-            for (int i = 1; i < splitCommand.size(); i++) { // skip first as task desc cannot be empty
-                // search for "/by"
-                if (splitCommand.get(i).equals("/by")) {
-                    byIndex = i;
-                    break;
-                }
-            }
-            if (byIndex == -1) {
-                // "/by" not found
-                throw new UxieSyntaxException("A deadline needs a... deadline. ('/by')");
-            }
-
-            String dlDesc = String.join(" ", splitCommand.subList(0, byIndex));
-            LocalDateTime dlBy = DateTimeParse.parseInput(
-                    String.join(" ", splitCommand.subList(byIndex + 1, splitCommand.size())));
-            return new DeadlineCommand(dlDesc, dlBy);
+            return parseDeadlineCommand(splitCommand);
 
         case "event": // add task as an event
-            splitCommand.remove(0); // remove command word
-            if (splitCommand.isEmpty() || splitCommand.get(0).matches("\s*|/.*")) {
-                // desc is empty
-                throw new UxieSyntaxException("Your task description can't be empty.");
-            }
-            int fromIndex = -1;
-            int toIndex = -1;
-            for (int i = 1; i < splitCommand.size(); i++) { // skip first as task desc cannot be empty
-                // search for "/from"
-                if (splitCommand.get(i).equals("/from")) {
-                    fromIndex = i;
-                }
-                // search for "/to"
-                if (splitCommand.get(i).equals("/to")) {
-                    if (fromIndex == -1) {
-                        // "/to" before "/from"
-                        throw new UxieSyntaxException("/from should be before /to.");
-                    }
-                    toIndex = i;
-                    break;
-                }
-            }
-
-            if (fromIndex == -1 || toIndex == -1) {
-                // argument missing
-                throw new UxieSyntaxException("You're missing an argument there. ('/from', '/to')");
-            }
-
-            String eDesc = String.join(" ", splitCommand.subList(0, fromIndex));
-            LocalDateTime eFrom = DateTimeParse.parseInput(
-                    String.join(" ", splitCommand.subList(fromIndex + 1, toIndex)));
-            LocalDateTime eTo = DateTimeParse.parseInput(
-                    String.join(" ", splitCommand.subList(toIndex + 1, splitCommand.size())));
-            return new EventCommand(eDesc, eFrom, eTo);
+            return parseEventCommand(splitCommand);
 
         case "goodbye":
         case "bye": // exits program
@@ -147,6 +69,173 @@ public class CommandParse {
         default: // unrecognized command
             throw new UxieSyntaxException("Consider checking your spelling.");
         }
+    }
+
+
+    /**
+     * Parses arguments in list into a MarkCommand.
+     *
+     * @param splitCommand separated arguments in command.
+     * @return generated MarkCommand
+     * @throws UxieSyntaxException If format is incorrect.
+     */
+    private static MarkCommand parseMarkCommand(List<String> splitCommand) throws UxieSyntaxException {
+        try {
+            return new MarkCommand(Integer.parseInt(splitCommand.get(1)) - 1);
+        } catch (NumberFormatException e) {
+            throw new UxieSyntaxException("That index doesn't seem right.");
+        }
+    }
+
+    /**
+     * Parses arguments in list into an UnmarkCommand.
+     *
+     * @param splitCommand separated arguments in command.
+     * @return generated UnmarkCommand
+     * @throws UxieSyntaxException If format is incorrect.
+     */
+    private static UnmarkCommand parseUnmarkCommand(List<String> splitCommand) throws UxieSyntaxException {
+        try {
+            return new UnmarkCommand(Integer.parseInt(splitCommand.get(1)) - 1);
+        } catch (NumberFormatException e) {
+            throw new UxieSyntaxException("That index doesn't seem right.");
+        }
+    }
+
+    /**
+     * Parses arguments in list into a DeleteCommand.
+     *
+     * @param splitCommand separated arguments in command.
+     * @return generated DeleteCommand
+     * @throws UxieSyntaxException If format is incorrect.
+     */
+    private static DeleteCommand parseDeleteCommand(List<String> splitCommand) throws UxieSyntaxException {
+        try {
+            return new DeleteCommand(Integer.parseInt(splitCommand.get(1)) - 1);
+        } catch (NumberFormatException e) {
+            throw new UxieSyntaxException("That index doesn't seem right.");
+        }
+    }
+
+    /**
+     * Parses arguments in list into a FindCommand.
+     *
+     * @param splitCommand separated arguments in command.
+     * @return generated FindCommand
+     * @throws UxieSyntaxException If format is incorrect.
+     */
+    private static FindCommand parseFindCommand(List<String> splitCommand) throws UxieSyntaxException {
+        splitCommand.remove(0);
+        String searchString = String.join(" ", splitCommand);
+        if (searchString.isBlank()) {
+            // search is empty
+            throw new UxieSyntaxException("Your search string can't be empty.");
+        }
+        return new FindCommand(searchString);
+    }
+
+    /**
+     * Parses arguments in list into a TodoCommand.
+     *
+     * @param splitCommand separated arguments in command.
+     * @return generated TodoCommand
+     * @throws UxieSyntaxException If format is incorrect.
+     */
+    private static TodoCommand parseTodoCommand(List<String> splitCommand) throws UxieSyntaxException {
+        splitCommand.remove(0); // remove command word
+        String todoDesc = String.join(" ", splitCommand);
+        if (todoDesc.isBlank()) {
+            // desc is empty
+            throw new UxieSyntaxException("Your task description can't be empty.");
+        }
+        return new TodoCommand(todoDesc);
+    }
+
+    /**
+     * Parses arguments in list into a DeadlineCommand.
+     *
+     * @param splitCommand separated arguments in command.
+     * @return generated DeadlineCommand
+     * @throws UxieSyntaxException If format is incorrect.
+     */
+    private static DeadlineCommand parseDeadlineCommand(List<String> splitCommand) throws UxieSyntaxException {
+        splitCommand.remove(0); // remove command word
+        if (splitCommand.isEmpty() || splitCommand.get(0).matches("\s*|/.*")) {
+            // desc is empty
+            throw new UxieSyntaxException("Your task description can't be empty.");
+        }
+        int byIndex = -1;
+        for (int i = 1; i < splitCommand.size(); i++) { // skip first as task desc cannot be empty
+            // search for "/by"
+            if (splitCommand.get(i).equals("/by")) {
+                byIndex = i;
+                break;
+            }
+        }
+        if (byIndex == -1) {
+            // "/by" not found
+            throw new UxieSyntaxException("A deadline needs a... deadline. ('/by')");
+        }
+
+        String dlDesc = String.join(" ", splitCommand.subList(0, byIndex));
+        LocalDateTime dlBy = DateTimeParse.parseInput(
+                String.join(" ", splitCommand.subList(byIndex + 1, splitCommand.size())));
+        return new DeadlineCommand(dlDesc, dlBy);
+    }
+
+    /**
+     * Parses arguments in list into an EventCommand.
+     *
+     * @param splitCommand separated arguments in command.
+     * @return generated EventCommand
+     * @throws UxieSyntaxException If format is incorrect.
+     */
+    private static EventCommand parseEventCommand(List<String> splitCommand) throws UxieSyntaxException {
+        splitCommand.remove(0); // remove command word
+        if (splitCommand.isEmpty() || splitCommand.get(0).matches("\s*|/.*")) {
+            // desc is empty
+            throw new UxieSyntaxException("Your task description can't be empty.");
+        }
+        int fromIndex = -1;
+        int toIndex = -1;
+        for (int i = 1; i < splitCommand.size(); i++) { // skip first as task desc cannot be empty
+            // search for "/from"
+            if (splitCommand.get(i).equals("/from")) {
+                fromIndex = i;
+            }
+            // search for "/to"
+            if (splitCommand.get(i).equals("/to")) {
+                if (fromIndex == -1) {
+                    // "/to" before "/from"
+                    throw new UxieSyntaxException("/from should be before /to.");
+                }
+                toIndex = i;
+                break;
+            }
+        }
+
+        if (fromIndex == -1 || toIndex == -1) {
+            // argument missing
+            throw new UxieSyntaxException("You're missing an argument there. ('/from', '/to')");
+        }
+
+        String eDesc = String.join(" ", splitCommand.subList(0, fromIndex));
+        LocalDateTime eFrom = DateTimeParse.parseInput(
+                String.join(" ", splitCommand.subList(fromIndex + 1, toIndex)));
+        LocalDateTime eTo = DateTimeParse.parseInput(
+                String.join(" ", splitCommand.subList(toIndex + 1, splitCommand.size())));
+        return new EventCommand(eDesc, eFrom, eTo);
+    }
+
+    /**
+     * Parses arguments in list into an ExitCommand.
+     *
+     * @param splitCommand separated arguments in command.
+     * @return generated ExitCommand
+     * @throws UxieSyntaxException If format is incorrect.
+     */
+    private static ExitCommand parseExitCommand(List<String> splitCommand) throws UxieSyntaxException {
+        return new ExitCommand();
     }
 
 }
