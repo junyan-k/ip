@@ -34,6 +34,13 @@ public class FindCommand extends Command {
             ui.uxieAppendln("I can't find any tasks mentioning that.");
         } else {
             ui.uxieAppendln("Here are the matching tasks:");
+
+            // verify that indices are within task list
+            for (int index: resultIndices) {
+                assert 0 < index && index < tasks.getSize()
+                        : "FindCommand::execute: index out of bounds";
+            }
+
             try {
                 for (int index: resultIndices) {
                     ui.uxieAppendln(String.format("%s. %s", index + 1, tasks.getTask(index)));

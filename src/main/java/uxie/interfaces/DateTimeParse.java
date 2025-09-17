@@ -42,6 +42,7 @@ public class DateTimeParse {
      * Uses {@link #OUTPUT_DATETIME_FORMAT}
      */
     public static String parseOutput(LocalDateTime dateTime) {
+        assert dateTime != null : "DateTimeParse#parseOutput: dateTime is null";
         return OUTPUT_DATETIME_FORMAT.format(dateTime);
     }
 
@@ -66,6 +67,7 @@ public class DateTimeParse {
      * Uses {@link #STORAGE_DATETIME_FORMAT}
      */
     public static String parseStorageWrite(LocalDateTime dateTime) {
+        assert dateTime != null : "DateTimeParse#parseStorageWrite: dateTime is null";
         return STORAGE_DATETIME_FORMAT.format(dateTime);
     }
 
