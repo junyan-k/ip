@@ -89,6 +89,11 @@ public class Uxie {
      * @return response for Uxie to print.
      */
     public String getResponse(String input) {
+        // check if input is blank
+        if (input.isBlank()) {
+            return "...you there?";
+        }
+
         try {
             Command c = CommandParse.parse(input);
             c.execute(tasks, ui, storage);
