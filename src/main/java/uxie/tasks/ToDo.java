@@ -49,7 +49,7 @@ public class ToDo extends Task {
 
     /**
      * Returns ToDos as String.
-     * Format: "[T][<'X' if completed, ' ' if not>] <desc>"
+     * Format: "[T][<'X' if completed, ' ' if not>] {desc}"
      */
     @Override
     public String toString() {

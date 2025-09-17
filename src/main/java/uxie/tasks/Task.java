@@ -1,9 +1,9 @@
 package uxie.tasks;
 
-import uxie.exceptions.UxieIllegalOpException;
-
 import java.time.LocalDateTime;
 import java.util.List;
+
+import uxie.exceptions.UxieIllegalOpException;
 
 /**
  * Tasks are tasks to be completed.
@@ -87,7 +87,7 @@ public abstract class Task {
 
     /**
      * Returns this Task as String.
-     * Format: "[<X if complete, blank if not>] <desc>"
+     * Format: "[<'X' if complete, ' ' if not>] {@link #desc}"
      */
     @Override
     public String toString() {
