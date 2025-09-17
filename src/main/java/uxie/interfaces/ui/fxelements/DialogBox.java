@@ -45,6 +45,7 @@ public class DialogBox extends HBox {
             e.printStackTrace(); // can't output to GUI coz. well. can't make a dialog box
         }
 
+        assert dialogText != null : "DialogBox: dialogText is null";
         dialog.setText(dialogText);
         Optional<Font> dialogFont = GuiMain.getFont();
         dialogFont.ifPresent(font -> dialog.setFont(font));

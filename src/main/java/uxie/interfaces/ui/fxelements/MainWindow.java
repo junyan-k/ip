@@ -42,12 +42,18 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        // ensure images are not null
+        assert uxieImage != null : "MainWindow: uxieImage is null";
+        assert userImage != null : "MainWindow: userImage is null";
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
                 DialogBox.getUxieDialog(Ui.WELCOME, uxieImage)
         );
 
         Optional<Font> textFieldFont = GuiMain.getFont();
+        // to verify it is actually obtained
+        assert textFieldFont.isPresent() : "MainWindow: textFieldFont is empty";
         textFieldFont.ifPresent(font -> {
             userInput.setFont(font);
             sendButton.setFont(font);

@@ -50,6 +50,7 @@ public class TaskList {
             throw new UxieIllegalOpException("That task doesn't exist.");
         }
         Task removedTask = tasks.get(taskIndex);
+        assert removedTask != null : "TaskList#deleteTask: removedTask is null";
         tasks.remove(taskIndex);
         return removedTask.getDesc();
     }
@@ -102,6 +103,7 @@ public class TaskList {
             throw new UxieIllegalOpException("That task doesn't exist.");
         }
         Task t = tasks.get(taskIndex);
+        assert t != null : "TaskList#deleteTask: task to mark complete is null";
         t.markCompleted();
         return t.getDesc();
     }
@@ -117,6 +119,7 @@ public class TaskList {
             throw new UxieIllegalOpException("That task doesn't exist.");
         }
         Task t = tasks.get(taskIndex);
+        assert t != null : "TaskList#deleteTask: task to mark incomplete is null";
         t.markIncomplete();
         return t.getDesc();
     }

@@ -1,9 +1,9 @@
 package uxie.tasks;
 
-import uxie.interfaces.DateTimeParse;
-
 import java.time.LocalDateTime;
 import java.util.List;
+
+import uxie.interfaces.DateTimeParse;
 
 /**
  * Deadlines are Tasks that need to be done by a specific date/time.
@@ -56,7 +56,7 @@ public class Deadline extends Task {
 
     /**
      * Returns Deadline as String.
-     * Format: "[D][<'X' if completed, ' ' if not>] <desc> (by: <deadline>)"
+     * Format: "[D][<'X' if completed, ' ' if not>] {desc} (by: {@link #deadline})"
      */
     @Override
     public String toString() {

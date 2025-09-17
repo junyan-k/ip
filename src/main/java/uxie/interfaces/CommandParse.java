@@ -34,6 +34,9 @@ public class CommandParse {
     public static Command parse(String userCommand) throws UxieSyntaxException {
         List<String> splitCommand = new ArrayList<>(List.of(userCommand.split(" ")));
 
+        // verify splitCommand is not empty
+        assert !splitCommand.isEmpty() : "CommandParse#parse: splitCommand is empty";
+
         switch (splitCommand.get(0)) {
         case "list": // output contents of list
             return new ListCommand();

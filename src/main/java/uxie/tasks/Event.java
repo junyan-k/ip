@@ -1,9 +1,9 @@
 package uxie.tasks;
 
-import uxie.interfaces.DateTimeParse;
-
 import java.time.LocalDateTime;
 import java.util.List;
+
+import uxie.interfaces.DateTimeParse;
 
 /**
  * Events are Tasks that start and end at a specific date/time.
@@ -61,7 +61,7 @@ public class Event extends Task {
 
     /**
      * Returns Event as String.
-     * Format: "[E][<'X' if completed, ' ' if not>] <desc> (from: <startDT> to: <endDateTime>)"
+     * Format: "[E][<'X' if completed, ' ' if not>] {desc} (from: {@link #startDateTime} to: {@link #endDateTime})"
      */
     @Override
     public String toString() {
@@ -77,9 +77,9 @@ public class Event extends Task {
     @Override
     public boolean equals(Object o) {
         if (o instanceof Event e) {
-            return e.getDesc().equals(this.getDesc()) &&
-                    e.startDateTime.equals(this.startDateTime) &&
-                    e.endDateTime.equals(this.endDateTime);
+            return e.getDesc().equals(this.getDesc())
+                    && e.startDateTime.equals(this.startDateTime)
+                    && e.endDateTime.equals(this.endDateTime);
         }
         return false;
     }
