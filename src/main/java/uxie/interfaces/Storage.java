@@ -66,11 +66,12 @@ public class Storage {
 
     /**
      * Stores Task into CSV file.
-     * Format is: "[type],[completion],[description],(time1),(time2)"
+     * Format is: "[type],[completion],[description],[tag],(time1),(time2)"
      * <p>
      * type: T if Todos, D if Deadline, E if Event
      * completion: 1 if completed, 0 otherwise
      * description: description of Task
+     * tags: tag of Task. if without tag, this field is blank
      * time1 (if needed): if Deadline, deadline. if Event, from
      * time2 (if needed): if Event, to
      *
@@ -82,6 +83,7 @@ public class Storage {
         arguments.add(task.getSymbol());
         arguments.add(task.isCompleted() ? "1" : "0");
         arguments.add(task.getDesc());
+        arguments.add(task.getTag());
         for (LocalDateTime dt: task.getTimeArguments()) {
             arguments.add(DateTimeParse.parseStorageWrite(dt));
         }
