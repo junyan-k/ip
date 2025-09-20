@@ -12,6 +12,7 @@ import uxie.commands.ExitCommand;
 import uxie.commands.FindCommand;
 import uxie.commands.ListCommand;
 import uxie.commands.MarkCommand;
+import uxie.commands.TagCommand;
 import uxie.commands.TodoCommand;
 import uxie.commands.UnmarkCommand;
 import uxie.exceptions.UxieSyntaxException;
@@ -52,6 +53,9 @@ public class CommandParse {
 
         case "find": // find tasks containing string
             return parseFindCommand(splitCommand);
+
+        case "tag":
+            return parseTagCommand(splitCommand);
 
         case "todo": // add task as a todos
             return parseTodoCommand(splitCommand);
@@ -132,6 +136,23 @@ public class CommandParse {
             throw new UxieSyntaxException("Your search string can't be empty.");
         }
         return new FindCommand(searchString);
+    }
+
+    /**
+     * Parses arguments in list into a TagCommand.
+     *
+     * @param splitCommand separated arguments in command.
+     * @return generated TagCommand.
+     * @throws UxieSyntaxException if format is incorrect.
+     */
+    private static TagCommand parseTagCommand(List<String> splitCommand) throws UxieSyntaxException {
+        try {
+            int taskIndex = Integer.parseInt(splitCommand.get(1));
+            String tag = String.join(" ", splitCommand.subList(2, splitCommand.size()));
+            return new TagCommand(taskIndex, tag);
+        } catch (NumberFormatException e) {
+            throw new UxieSyntaxException("That index doesn't seem right.");
+        }
     }
 
     /**
