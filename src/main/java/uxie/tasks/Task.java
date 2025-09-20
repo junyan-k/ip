@@ -113,8 +113,9 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s (tag: %s)",
-                this.isCompleted ? "X" : " ", this.desc, this.tag);
+        String tagString = tag.isBlank() ? "" : String.format(" (tag: %s)", this.tag);
+        return String.format("[%s] %s%s",
+                this.isCompleted ? "X" : " ", this.desc, tagString);
     }
 
 }
