@@ -18,6 +18,9 @@ public abstract class Task {
     /** Description of Task. */
     private String desc;
 
+    /** Tag of Task. */
+    private String tag;
+
     /**
      * Generates Task with description.
      * Task is incomplete by default.
@@ -25,6 +28,7 @@ public abstract class Task {
     public Task(String desc) {
         this.desc = desc;
         this.isCompleted = false;
+        this.tag = "";
     }
 
     /**
@@ -33,6 +37,7 @@ public abstract class Task {
     public Task(boolean isCompleted, String desc) {
         this.desc = desc;
         this.isCompleted = isCompleted;
+        this.tag = "";
     }
 
     /**
@@ -69,6 +74,16 @@ public abstract class Task {
     }
 
     /**
+     * Tags this Task with given String.
+     * If Task previously had a tag, it is overwritten.
+     *
+     * @param tag new tag for Task.
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    /**
      * Returns description of Task.
      */
     public String getDesc() {
@@ -79,6 +94,13 @@ public abstract class Task {
      * Returns task type symbol.
      */
     public abstract String getSymbol();
+
+    /**
+     * Returns tag of Task.
+     */
+    public String getTag() {
+        return this.tag;
+    }
 
     /**
      * Returns all time arguments in order.
