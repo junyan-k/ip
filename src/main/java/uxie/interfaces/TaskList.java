@@ -124,4 +124,21 @@ public class TaskList {
         return t.getDesc();
     }
 
+    /**
+     * Tags task matching index with given String.
+     *
+     * @param taskIndex index of Task to tag.
+     * @param tag String to tag Task with.
+     * @return description of task tagged.
+     * @throws UxieIllegalOpException when taskIndex is out of bounds.
+     */
+    public String tagTask(int taskIndex, String tag) throws UxieIllegalOpException {
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new UxieIllegalOpException("That task doesn't exist.");
+        }
+        Task t = tasks.get(taskIndex);
+        assert t != null : "TaskList#tagTask: task to tag is null";
+        t.setTag(tag);
+        return t.getDesc();
+    }
 }
