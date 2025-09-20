@@ -119,6 +119,30 @@ public class Storage {
     }
 
     /**
+     * Toggles completion status of task matching index.
+     * (complete -> incomplete and vice versa)
+     *
+     * @param index row index of Task in CSV file.
+     * @param tag tag to set Task with
+     * @throws UxieIOException I/O exception during editing of file.
+     */
+    public void tagTask(int index, String tag) throws UxieIOException {
+        try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()))) {
+            List<String[]> taskRows = taskFileReader.readAll();
+            taskFileReader.close();
+
+            String[] taskRow = taskRows.get(index);
+            taskRow[3] = tag;
+
+            CSVWriter taskFileWriter = new CSVWriter(new FileWriter(getTaskFile()));
+            taskFileWriter.writeAll(taskRows);
+            taskFileWriter.close();
+        } catch (IOException | CsvException e) {
+            throw new UxieIOException("I can't seem to edit this tag.");
+        }
+    }
+
+    /**
      * Converts array of Strings into a Task.
      *
      * @param arguments args for Task. {@link #storeTask(Task)} for format
