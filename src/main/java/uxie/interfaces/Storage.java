@@ -130,28 +130,27 @@ public class Storage {
             return Optional.empty();
         }
         try {
+            Task result = null;
             switch (arguments[0]) {
             case "T":
-                if (arguments.length == 3) { // valid
-                    return Optional.of(new ToDo(arguments[1].equals("1"), arguments[2]));
+                if (arguments.length == 4) { // valid
+                    result = new ToDo(arguments[1].equals("1"), arguments[2]);
                 }
                 break;
 
             case "D":
-                if (arguments.length == 4 && !arguments[3].isBlank()) { // valid
-                    return Optional.of(new Deadline(arguments[1].equals("1"), arguments[2],
-                            DateTimeParse.parseStorageRead(arguments[3])));
+                if (arguments.length == 5 && !arguments[4].isBlank()) { // valid
+                    result = new Deadline(arguments[1].equals("1"), arguments[2],
+                            DateTimeParse.parseStorageRead(arguments[4]));
                 }
                 break;
 
             case "E":
-                if (arguments.length == 5 && !arguments[3].isBlank()
-                        && !arguments[4].isBlank()) { // valid
-                    return Optional.of(
-                            new Event(arguments[1].equals("1"), arguments[2],
-                                    DateTimeParse.parseStorageRead(arguments[3]),
-                                    DateTimeParse.parseStorageRead(arguments[4]))
-                    );
+                if (arguments.length == 6 && !arguments[4].isBlank()
+                        && !arguments[5].isBlank()) { // valid
+                    result = new Event(arguments[1].equals("1"), arguments[2],
+                            DateTimeParse.parseStorageRead(arguments[4]),
+                            DateTimeParse.parseStorageRead(arguments[5]));
                 }
                 break;
 
@@ -159,10 +158,21 @@ public class Storage {
                 // task symbol not recognized
                 return Optional.empty();
             }
+
+            // arriving here, result should not be null
+            if (result == null) {
+                return Optional.empty();
+            } else {
+                // add tag if present
+                if (!arguments[3].isEmpty()) {
+                    result.setTag(arguments[3]);
+                }
+
+                return Optional.of(result);
+            }
         } catch (UxieSyntaxException e) {
             return Optional.empty();
         }
-        return Optional.empty();
     }
 
     /**
