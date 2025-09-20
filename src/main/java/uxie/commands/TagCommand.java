@@ -39,7 +39,11 @@ public class TagCommand extends Command {
         try {
             String desc = tasks.tagTask(taskIndex, tag);
             storage.tagTask(taskIndex, tag);
-            ui.uxieAppendln(String.format("Tagged Task %s (%s) as #%s.", taskIndex + 1, desc, tag));
+            if (tag.isBlank()) {
+                ui.uxieAppendln(String.format("Cleared tag from Task %s (%s).", taskIndex + 1, desc));
+            } else {
+                ui.uxieAppendln(String.format("Tagged Task %s (%s) as #%s.", taskIndex + 1, desc, tag));
+            }
         } catch (UxieIllegalOpException | UxieIOException e) {
             ui.appendException(e);
         }
