@@ -146,10 +146,14 @@ public class CommandParse {
      * @throws UxieSyntaxException if format is incorrect.
      */
     private static TagCommand parseTagCommand(List<String> splitCommand) throws UxieSyntaxException {
+        if (splitCommand.size() <= 1) {
+            // missing taskIndex
+            throw new UxieSyntaxException("You're missing your task index.");
+        }
         try {
             int taskIndex = Integer.parseInt(splitCommand.get(1));
             String tag = String.join(" ", splitCommand.subList(2, splitCommand.size()));
-            return new TagCommand(taskIndex, tag);
+            return new TagCommand(taskIndex - 1, tag);
         } catch (NumberFormatException e) {
             throw new UxieSyntaxException("That index doesn't seem right.");
         }
