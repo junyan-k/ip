@@ -149,54 +149,64 @@ public class Storage {
      * @return Optional containing Task if valid format, or empty if invalid.
      */
     private static Optional<Task> convertTaskRow(String[] arguments) {
-        // verify completion (1) and description (2)
-        if (!arguments[1].matches("[01]") || arguments[2].isBlank()) {
-            return Optional.empty();
-        }
-        try {
-            Task result = null;
-            switch (arguments[0]) {
-            case "T":
-                if (arguments.length == 4) { // valid
-                    result = new ToDo(arguments[1].equals("1"), arguments[2]);
-                }
-                break;
+        if (verifyBasic(arguments)) {
+            try {
+                Task result = null;
+                switch (arguments[0]) {
+                case "T":
+                    if (arguments.length == 4) { // valid
+                        result = new ToDo(arguments[1].equals("1"), arguments[2]);
+                    }
+                    break;
 
-            case "D":
-                if (arguments.length == 5 && !arguments[4].isBlank()) { // valid
-                    result = new Deadline(arguments[1].equals("1"), arguments[2],
-                            DateTimeParse.parseStorageRead(arguments[4]));
-                }
-                break;
+                case "D":
+                    if (arguments.length == 5 && !arguments[4].isBlank()) { // valid
+                        result = new Deadline(arguments[1].equals("1"), arguments[2],
+                                DateTimeParse.parseStorageRead(arguments[4]));
+                    }
+                    break;
 
-            case "E":
-                if (arguments.length == 6 && !arguments[4].isBlank()
-                        && !arguments[5].isBlank()) { // valid
-                    result = new Event(arguments[1].equals("1"), arguments[2],
-                            DateTimeParse.parseStorageRead(arguments[4]),
-                            DateTimeParse.parseStorageRead(arguments[5]));
-                }
-                break;
+                case "E":
+                    if (arguments.length == 6 && !arguments[4].isBlank()
+                            && !arguments[5].isBlank()) { // valid
+                        result = new Event(arguments[1].equals("1"), arguments[2],
+                                DateTimeParse.parseStorageRead(arguments[4]),
+                                DateTimeParse.parseStorageRead(arguments[5]));
+                    }
+                    break;
 
-            default:
-                // task symbol not recognized
+                default:
+                    // task symbol not recognized
+                    return Optional.empty();
+                }
+
+                // arriving here, result should not be null
+                if (result == null) {
+                    return Optional.empty();
+                } else {
+                    // add tag if present
+                    if (!arguments[3].isEmpty()) {
+                        result.setTag(arguments[3]);
+                    }
+
+                    return Optional.of(result);
+                }
+            } catch (UxieSyntaxException e) {
                 return Optional.empty();
             }
-
-            // arriving here, result should not be null
-            if (result == null) {
-                return Optional.empty();
-            } else {
-                // add tag if present
-                if (!arguments[3].isEmpty()) {
-                    result.setTag(arguments[3]);
-                }
-
-                return Optional.of(result);
-            }
-        } catch (UxieSyntaxException e) {
+        } else {
             return Optional.empty();
         }
+    }
+
+    /**
+     * Verifies if Task argument array has a Task type, valid completion status and description.
+     */
+    private static boolean verifyBasic(String[] arguments) {
+        boolean hasType = !arguments[0].isBlank();
+        boolean isCompletionValid = arguments[1].matches("[01]");
+        boolean hasDesc = !arguments[2].isBlank();
+        return hasType && isCompletionValid && hasDesc;
     }
 
     /**
