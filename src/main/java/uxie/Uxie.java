@@ -3,6 +3,7 @@ package uxie;
 import uxie.commands.Command;
 import uxie.exceptions.UxieException;
 import uxie.exceptions.UxieIOException;
+import uxie.exceptions.UxieSyntaxException;
 import uxie.interfaces.CommandParse;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
@@ -32,12 +33,16 @@ public class Uxie {
     public Uxie() {
         // initialization
         ui = new Ui();
-        storage = new Storage(); // see uxie.storage.Storage for default taskFilePath
+        storage = new Storage();
         try {
-            tasks = new TaskList(storage.readTasks());
+            Storage.ReadTaskResult readTaskResult = storage.readTasks();
+            tasks = new TaskList(readTaskResult.getTasks());
+            handleMalformedRows(readTaskResult);
         } catch (UxieIOException e) {
             ui.printException(e);
             tasks = new TaskList();
+        } catch (UxieSyntaxException e) {
+            ui.printException(e);
         }
     }
 
@@ -51,10 +56,25 @@ public class Uxie {
         ui = new Ui();
         storage = new Storage(taskFilePath);
         try {
-            tasks = new TaskList(storage.readTasks());
+            Storage.ReadTaskResult readTaskResult = storage.readTasks();
+            tasks = new TaskList(readTaskResult.getTasks());
+            handleMalformedRows(readTaskResult);
         } catch (UxieIOException e) {
             ui.printException(e);
             tasks = new TaskList();
+        } catch (UxieSyntaxException e) {
+            ui.printException(e);
+        }
+    }
+
+    private void handleMalformedRows(Storage.ReadTaskResult readTaskResult)
+            throws UxieSyntaxException {
+        // deal with malformed rows
+        String malformedRows = readTaskResult.getMalformedRows();
+        if (!malformedRows.isEmpty()) {
+            throw new UxieSyntaxException(String.format(
+                    "Line(s) [%s] in task file is/are malformed.", malformedRows
+            ));
         }
     }
 

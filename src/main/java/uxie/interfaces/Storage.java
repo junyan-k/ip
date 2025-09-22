@@ -48,6 +48,41 @@ public class Storage {
     }
 
     /**
+     * This class represents the result of Storage::readTasks.
+     */
+    public static class ReadTaskResult {
+
+        /** Resulting list of Tasks. */
+        private List<Task> tasks;
+
+        /** Resulting list of indices of malformed rows. */
+        private List<String> malformedRows;
+
+        /**
+         * Generates a ReadTaskResult.
+         */
+        public ReadTaskResult(List<String> malformedRows, List<Task> tasks) {
+            this.malformedRows = malformedRows;
+            this.tasks = tasks;
+        }
+
+        /**
+         * Returns the list of Tasks.
+         */
+        public List<Task> getTasks() {
+            return tasks;
+        }
+
+        /**
+         * Returns malformed row indices as String joined by ",".
+         */
+        public String getMalformedRows() {
+            return String.join(",", malformedRows);
+        }
+
+    }
+
+    /**
      * Returns local task CSV file.
      * If not found, creates it and returns.
      *
@@ -149,53 +184,82 @@ public class Storage {
      * @return Optional containing Task if valid format, or empty if invalid.
      */
     private static Optional<Task> convertTaskRow(String[] arguments) {
-        // verify completion (1) and description (2)
-        if (!arguments[1].matches("[01]") || arguments[2].isBlank()) {
+        if (verifyBasic(arguments)) {
+            try {
+                Task result = switch (arguments[0]) {
+                case "T" -> convertToDoRow(arguments);
+                case "D" -> convertDeadlineRow(arguments);
+                case "E" -> convertEventRow(arguments);
+                default -> null;
+                };
+                return Optional.ofNullable(result);
+            } catch (UxieSyntaxException e) {
+                return Optional.empty();
+            }
+        } else {
             return Optional.empty();
         }
-        try {
-            Task result = null;
-            switch (arguments[0]) {
-            case "T":
-                if (arguments.length == 4) { // valid
-                    result = new ToDo(arguments[1].equals("1"), arguments[2]);
-                }
-                break;
+    }
 
-            case "D":
-                if (arguments.length == 5 && !arguments[4].isBlank()) { // valid
-                    result = new Deadline(arguments[1].equals("1"), arguments[2],
-                            DateTimeParse.parseStorageRead(arguments[4]));
-                }
-                break;
+    /**
+     * Verify if Task argument array has a Task type, valid completion status and description.
+     */
+    private static boolean verifyBasic(String[] arguments) {
+        boolean hasType = !arguments[0].isBlank();
+        boolean isCompletionValid = arguments[1].matches("[01]");
+        boolean hasDesc = !arguments[2].isBlank();
+        return hasType && isCompletionValid && hasDesc;
+    }
 
-            case "E":
-                if (arguments.length == 6 && !arguments[4].isBlank()
-                        && !arguments[5].isBlank()) { // valid
-                    result = new Event(arguments[1].equals("1"), arguments[2],
-                            DateTimeParse.parseStorageRead(arguments[4]),
-                            DateTimeParse.parseStorageRead(arguments[5]));
-                }
-                break;
-
-            default:
-                // task symbol not recognized
-                return Optional.empty();
+    /**
+     * Convert a Task argument array into a ToDo object.
+     */
+    private static ToDo convertToDoRow(String[] arguments) {
+        if (arguments.length == 4) { // valid
+            ToDo result = new ToDo(arguments[1].equals("1"), arguments[2]);
+            // add tag if present
+            if (!arguments[3].isEmpty()) {
+                result.setTag(arguments[3]);
             }
+            return result;
+        } else {
+            return null;
+        }
+    }
 
-            // arriving here, result should not be null
-            if (result == null) {
-                return Optional.empty();
-            } else {
-                // add tag if present
-                if (!arguments[3].isEmpty()) {
-                    result.setTag(arguments[3]);
-                }
-
-                return Optional.of(result);
+    /**
+     * Convert a Task argument array into a Deadline object.
+     */
+    private static Deadline convertDeadlineRow(String[] arguments) throws UxieSyntaxException {
+        if (arguments.length == 5 && !arguments[4].isBlank()) { // valid
+            Deadline result = new Deadline(arguments[1].equals("1"), arguments[2],
+                    DateTimeParse.parseStorageRead(arguments[4]));
+            // add tag if present
+            if (!arguments[3].isEmpty()) {
+                result.setTag(arguments[3]);
             }
-        } catch (UxieSyntaxException e) {
-            return Optional.empty();
+            return result;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Convert a Task argument array into an Event object.
+     */
+    private static Event convertEventRow(String[] arguments) throws UxieSyntaxException {
+        if (arguments.length == 6 && !arguments[4].isBlank()
+                && !arguments[5].isBlank()) { // valid
+            Event result = new Event(arguments[1].equals("1"), arguments[2],
+                    DateTimeParse.parseStorageRead(arguments[4]),
+                    DateTimeParse.parseStorageRead(arguments[5]));
+            // add tag if present
+            if (!arguments[3].isEmpty()) {
+                result.setTag(arguments[3]);
+            }
+            return result;
+        } else {
+            return null;
         }
     }
 
@@ -204,17 +268,23 @@ public class Storage {
      *
      * @throws UxieIOException I/O exception during reading of file.
      */
-    public List<Task> readTasks() throws UxieIOException {
+    public ReadTaskResult readTasks() throws UxieIOException {
         try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()))) {
             List<String[]> taskRows = taskFileReader.readAll();
             taskFileReader.close();
 
             List<Task> tasks = new ArrayList<>();
-            for (String[] taskRow: taskRows) {
-                Optional<Task> maybeTask = convertTaskRow(taskRow);
-                maybeTask.ifPresent(tasks::add); // TODO: Add exceptions+messages for different mis-formatted data
+            List<String> malformedRows = new ArrayList<>();
+            for (int i = 0; i < taskRows.size(); i++) {
+                Optional<Task> maybeTask = convertTaskRow(taskRows.get(i));
+                if (maybeTask.isPresent()) {
+                    tasks.add(maybeTask.get());
+                } else {
+                    malformedRows.add(String.format("%s", i + 1));
+                }
             }
-            return tasks;
+
+            return new ReadTaskResult(malformedRows, tasks);
         } catch (IOException | CsvException e) {
             throw new UxieIOException("I can't read your file.");
         }
