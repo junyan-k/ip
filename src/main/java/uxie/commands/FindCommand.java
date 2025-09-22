@@ -33,7 +33,7 @@ public class FindCommand extends Command {
         if (resultIndices.isEmpty()) {
             ui.uxieAppendln("I can't find any tasks mentioning that.");
         } else {
-            ui.uxieAppendln("Here are the matching tasks:");
+            ui.uxieAppendln("Here are the matching tasks:\n");
 
             // verify that indices are within task list
             for (int index: resultIndices) {
@@ -43,7 +43,7 @@ public class FindCommand extends Command {
 
             try {
                 for (int index: resultIndices) {
-                    ui.uxieAppendln(String.format("%s. %s", index + 1, tasks.getTask(index)));
+                    ui.uxieAppendln(String.format("%s. %s\n", index + 1, tasks.getTask(index)));
                 }
             } catch (UxieIllegalOpException e) {
                 ui.appendException(e); // this should never happen as indices are produced by TaskList
