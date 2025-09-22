@@ -48,6 +48,41 @@ public class Storage {
     }
 
     /**
+     * This class represents the result of Storage::readTasks.
+     */
+    public static class ReadTaskResult {
+
+        /** Resulting list of Tasks. */
+        private List<Task> tasks;
+
+        /** Resulting list of indices of malformed rows. */
+        private List<String> malformedRows;
+
+        /**
+         * Generates a ReadTaskResult.
+         */
+        public ReadTaskResult(List<String> malformedRows, List<Task> tasks) {
+            this.malformedRows = malformedRows;
+            this.tasks = tasks;
+        }
+
+        /**
+         * Returns the list of Tasks.
+         */
+        public List<Task> getTasks() {
+            return tasks;
+        }
+
+        /**
+         * Returns malformed row indices as String joined by ",".
+         */
+        public String getMalformedRows() {
+            return String.join(",", malformedRows);
+        }
+
+    }
+
+    /**
      * Returns local task CSV file.
      * If not found, creates it and returns.
      *
