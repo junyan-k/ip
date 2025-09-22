@@ -16,6 +16,9 @@ public class TaskList {
     /** List of tasks. */
     private List<Task> tasks;
 
+    /** List of malformed row indices. */
+    private List<String> malformedRows;
+
     /**
      * Generates empty TaskList.
      */
@@ -83,6 +86,20 @@ public class TaskList {
             throw new UxieIllegalOpException("That task doesn't exist.");
         }
         return tasks.get(taskIndex);
+    }
+
+    /**
+     * Adds an index to the list of malformed rows.
+     */
+    public void addMalformedRow(int i) {
+        malformedRows.add(String.format("%s", i + 1));
+    }
+
+    /**
+     * Returns list of malformed row indices as a single String joined with ','.
+     */
+    public String getMalformedRows() {
+        return String.join(",", malformedRows);
     }
 
     /**
