@@ -49,6 +49,7 @@ public class Storage {
 
     /**
      * This class represents the result of Storage::readTasks.
+     * Code for this class was generated with AI.
      */
     public static class ReadTaskResult {
 
