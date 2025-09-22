@@ -267,9 +267,8 @@ public class Storage {
      * Reads Tasks from task file.
      *
      * @throws UxieIOException I/O exception during reading of file.
-     * @throws UxieSyntaxException when file contents are in incorrect format.
      */
-    public List<Task> readTasks() throws UxieIOException, UxieSyntaxException {
+    public ReadTaskResult readTasks() throws UxieIOException {
         try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()))) {
             List<String[]> taskRows = taskFileReader.readAll();
             taskFileReader.close();
@@ -285,15 +284,7 @@ public class Storage {
                 }
             }
 
-            // deal with malformed rows
-            if (!malformedRows.isEmpty()) {
-                throw new UxieSyntaxException(String.format(
-                        "Line(s) [%s] of the task file is/are malformed.",
-                        String.join(",", malformedRows)
-                ));
-            }
-
-            return tasks;
+            return new ReadTaskResult(malformedRows, tasks);
         } catch (IOException | CsvException e) {
             throw new UxieIOException("I can't read your file.");
         }
