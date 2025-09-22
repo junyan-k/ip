@@ -232,17 +232,32 @@ public class Storage {
      * Reads Tasks from task file.
      *
      * @throws UxieIOException I/O exception during reading of file.
+     * @throws UxieSyntaxException when file contents are in incorrect format.
      */
-    public List<Task> readTasks() throws UxieIOException {
+    public List<Task> readTasks() throws UxieIOException, UxieSyntaxException {
         try (CSVReader taskFileReader = new CSVReader(new FileReader(getTaskFile()))) {
             List<String[]> taskRows = taskFileReader.readAll();
             taskFileReader.close();
 
             List<Task> tasks = new ArrayList<>();
-            for (String[] taskRow: taskRows) {
-                Optional<Task> maybeTask = convertTaskRow(taskRow);
-                maybeTask.ifPresent(tasks::add); // TODO: Add exceptions+messages for different mis-formatted data
+            List<String> malformedRows = new ArrayList<>();
+            for (int i = 0; i < taskRows.size(); i++) {
+                Optional<Task> maybeTask = convertTaskRow(taskRows.get(i));
+                if (maybeTask.isPresent()) {
+                    tasks.add(maybeTask.get());
+                } else {
+                    malformedRows.add(String.format("%s", i + 1));
+                }
             }
+
+            // deal with malformed rows
+            if (!malformedRows.isEmpty()) {
+                throw new UxieSyntaxException(String.format(
+                        "Line(s) [%s] of the task file is/are malformed.",
+                        String.join(",", malformedRows)
+                ));
+            }
+
             return tasks;
         } catch (IOException | CsvException e) {
             throw new UxieIOException("I can't read your file.");

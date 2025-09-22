@@ -3,6 +3,7 @@ package uxie;
 import uxie.commands.Command;
 import uxie.exceptions.UxieException;
 import uxie.exceptions.UxieIOException;
+import uxie.exceptions.UxieSyntaxException;
 import uxie.interfaces.CommandParse;
 import uxie.interfaces.Storage;
 import uxie.interfaces.TaskList;
@@ -35,7 +36,7 @@ public class Uxie {
         storage = new Storage(); // see uxie.storage.Storage for default taskFilePath
         try {
             tasks = new TaskList(storage.readTasks());
-        } catch (UxieIOException e) {
+        } catch (UxieException e) {
             ui.printException(e);
             tasks = new TaskList();
         }
@@ -52,7 +53,7 @@ public class Uxie {
         storage = new Storage(taskFilePath);
         try {
             tasks = new TaskList(storage.readTasks());
-        } catch (UxieIOException e) {
+        } catch (UxieException e) {
             ui.printException(e);
             tasks = new TaskList();
         }
