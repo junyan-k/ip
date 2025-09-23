@@ -13,7 +13,7 @@ import uxie.interfaces.ui.Ui;
  */
 public class DeleteCommand extends Command {
 
-    /** Index of task to delete in list. */
+    /** Index of task to delete in list. 0-indexed. */
     private final int taskIndex;
 
     /**
