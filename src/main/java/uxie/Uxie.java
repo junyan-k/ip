@@ -67,6 +67,12 @@ public class Uxie {
         }
     }
 
+    /**
+     * Handles malformed rows from {@link Storage.ReadTaskResult}.
+     *
+     * @param readTaskResult result of {@link Storage#readTasks}
+     * @throws UxieSyntaxException if there are malformed rows in result
+     */
     private void handleMalformedRows(Storage.ReadTaskResult readTaskResult)
             throws UxieSyntaxException {
         // deal with malformed rows
