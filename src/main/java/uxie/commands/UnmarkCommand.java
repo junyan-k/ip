@@ -13,7 +13,7 @@ import uxie.interfaces.ui.Ui;
  */
 public class UnmarkCommand extends Command {
 
-    /** Index of task to mark incomplete. */
+    /** Index of task to mark incomplete. 0-indexed. */
     private final int taskIndex;
 
     /**
