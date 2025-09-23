@@ -13,7 +13,7 @@ import uxie.interfaces.ui.Ui;
  */
 public class TagCommand extends Command {
 
-    /** Index of task to tag. */
+    /** Index of task to tag. 0-indexed. */
     private int taskIndex;
 
     /** String to tag Task with. */
