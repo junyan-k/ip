@@ -42,6 +42,7 @@ public class TaskList {
     /**
      * Deletes task matching index from list.
      *
+     * @param taskIndex index of task to delete (0-indexed)
      * @return description of deleted task
      * @throws UxieIllegalOpException taskIndex is out of bounds in list
      */
@@ -74,7 +75,7 @@ public class TaskList {
     /**
      * Return task matching index.
      *
-     * @param taskIndex index of task in list to return
+     * @param taskIndex index of task in list to return (0-indexed)
      * @return task matching index
      * @throws UxieIllegalOpException when taskIndex is out of bounds.
      */
@@ -95,6 +96,7 @@ public class TaskList {
     /**
      * Marks task matching index as complete.
      *
+     * @param taskIndex index of task to mark complete (0-indexed)
      * @return description of task marked complete.
      * @throws UxieIllegalOpException if task index is out of bounds or task is already complete.
      */
@@ -111,6 +113,7 @@ public class TaskList {
     /**
      * Marks task matching index as incomplete.
      *
+     * @param taskIndex index of task to mark incomplete (0-indexed)
      * @return description of task marked incomplete.
      * @throws UxieIllegalOpException if task index is out of bounds or task is already incomplete.
      */
@@ -127,7 +130,7 @@ public class TaskList {
     /**
      * Tags task matching index with given String.
      *
-     * @param taskIndex index of Task to tag.
+     * @param taskIndex index of Task to tag (0-indexed)
      * @param tag String to tag Task with.
      * @return description of task tagged.
      * @throws UxieIllegalOpException when taskIndex is out of bounds.
