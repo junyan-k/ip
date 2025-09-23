@@ -13,7 +13,7 @@ import uxie.interfaces.ui.Ui;
  */
 public class MarkCommand extends Command {
 
-    /** Index of task to mark complete. */
+    /** Index of task to mark complete. 0-indexed. */
     private final int taskIndex;
 
     /**
